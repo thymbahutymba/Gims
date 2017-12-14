@@ -1,0 +1,543 @@
+:root{
+	--main-bg-color: #646464;
+	--main-fg-color: yellow;
+
+	--profile-name-color: #ff9600;
+
+	--hover-bg-color: #464646; /* darkblue;*/
+	--hover-fg-color: white;
+
+	--light-transparent-color: rgba(255, 255, 230, 0.8);
+	--menu-transparent-color: rgba(150,150,130, 1);
+	--menu-fg-color: #ff9600;
+
+	--botclick-bg-color: #007dff;
+	--botclick-fg-color: white;
+	--botclick_active-bg-color: #0055ff;
+
+	--footer-bg-color: #d6d6d6;
+	--footer-fg-color: #202020;
+}
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	display: inline;
+	background: #0078ff url("../images/wallpaper_3.jpg");
+	background-attachment: fixed;
+	background-size: 100%;
+	font-family: sans-serif;
+}
+
+header{
+	background-color: var(--main-bg-color);
+	width: 100%;
+	height: 40px;
+	color: var(--main-fg-color);
+	margin: 0;
+	font-family: sans-serif;
+	padding: 4px 0;
+	box-shadow: 0px 0px 10px;
+}
+
+h1, h2, h3, h4, h5, h6{
+	padding:0;
+	margin:0;
+}
+
+header a img{
+	height: 40px;
+	width: auto;
+	float: left;
+	margin-left: 7px;
+}
+
+header h1{
+	display: inline;
+	font-size: 35px;
+	font-style: italic;
+	width: 100%;
+	margin-left: 10px;
+
+}
+
+/*
+ * Da controllare se va bene in tutto il sito
+ */
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+#navbar {
+	font-size: 20px;
+	float: right;
+	display: inline;
+	margin: inherit;
+	text-align: center;
+	height: 40px;
+	line-height: 0px;
+}
+
+#navbar li a{
+	text-decoration: none;
+	padding: 8px;
+	display: inline;
+	color: var(--main-fg-color);
+	font-weight: bold;
+}
+
+#navbar li{
+	text-align: right;
+	display: inline-block;
+}
+
+#navbar li a.nome{
+	color: var(--profile-name-color);
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+#navbar a:hover, #navbar li:active a, #navbar li a.nome:hover{
+	color: var(--hover-fg-color);
+	background-color: var(--hover-bg-color);
+}
+
+#container{
+	height: auto;
+	min-height: 93%;
+	overflow: hidden;
+}
+
+footer {
+	color: var(--footer-fg-color);
+	width: 100%;
+	height: 20px;
+	background-color: var(--footer-bg-color);
+	box-shadow: 0px 0px 10px;
+}
+
+footer address{
+	float: left;
+}
+
+footer small{
+	float: right;
+}
+
+footer small a{
+	text-decoration: none;
+}
+
+.left{
+	float:left;
+}
+
+.right{
+	float: right;
+}
+
+/*
+ * Login and Register css section.
+ */
+
+#form {
+	width: 30%;
+	text-align: center;
+	background-color: var(--light-transparent-color);
+	border: 4px inset var(--light-transparent-color);
+	margin: 5% auto;
+}
+
+#form ul{
+	vertical-align: center;
+	margin-left: -40px;
+}
+
+#form small{
+	font-family: italic;
+}
+
+#form li{
+	list-style: none;
+	margin: 5px 0;
+}
+
+#form small a{
+	text-decoration: none;
+	color: blue;
+}
+
+#form input {
+	padding: 2%;
+	width: 70%
+}
+
+#form input.botclick{
+	width: auto;
+	font-family: sans-serif;
+	background-color: var(--botclick-bg-color);
+	color: var(--botclick-fg-color);
+	font-weight: bold;
+	border: 1px solid #007dff;
+	border-radius: 5px;
+	margin-top: 2%;
+}
+
+#form input.botclick:active{
+	background-color: var(--botclick_active-fg-color);
+}
+
+#form li select{
+	margin-right: 2%;
+	padding: 1%;
+}
+
+#form li input.time{
+	width: auto;
+}
+
+/*
+ * submenu section
+ */
+
+/*
+ * da cancellare per il futuro (non piu usato)
+.menu{
+	margin: 1% auto;
+	text-align: center;
+}
+
+.menu ul li{
+	display: inline-block;
+}
+ */
+
+.menu_profilo{
+	float: left;
+	margin: 1% auto;
+	clear: both;
+}
+
+/*.menu ul, */
+.menu_profilo ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+/*.menu ul li a,*/
+.menu_profilo ul li a{
+	display: block;
+	background-color: var(--menu-transparent-color);
+	font-size: 20px;
+	font-weight: bold;
+	font-style: oblique;
+	text-decoration: none;
+	color: var(--menu-fg-color);
+	margin: 0px;
+	padding: 6px;
+	border: 3px solid var(--light-transparent-color);
+	box-shadow: 0px 0px 4px;
+}
+
+/*.menu li a:hover,*/
+.menu_profilo li a:hover{
+	background-color: var(--hover-bg-color);
+	color: var(--hover-fg-color);
+}
+
+/*
+ * search_bar section
+ */
+
+#search_bar{
+	width: 50%;
+	margin: 1% auto;
+	/*padding: 3px 0px;*/
+	text-align: center;
+}
+
+#search_bar input, #search_bar select{
+	font-size: 18px;
+	padding: 7px;
+	border: 2px solid lightblue;
+	border-radius: 3px;
+}
+
+#search_bar select{
+	width: 15%;
+}
+
+#search_bar input.cerca{
+	width: 70%;
+}
+
+#search_bar input.cerca:focus{
+	border-bottom: 3px solid red;
+	border-radius: 3px;
+}
+
+#search_bar input.botclick:hover{
+	color: blue;
+	background-color: lightblue;
+}
+
+/*
+ * Palestre section
+ */
+
+.palestra{
+	margin: 3% auto;
+	background-color: var(--light-transparent-color);
+	width: 60%;
+}
+
+.palestra .tupla {
+	width: 100%;
+	border: 2px thick var(--light-transparent-color);
+	box-shadow:	0px 0px 10px;
+	padding: 1%;
+	display: block;
+	overflow: hidden;
+}
+
+.palestra .tupla .left h2,
+.palestra .tupla .left p{
+	padding: 1%;
+	margin: 0;
+}
+
+.palestra .valutazione{
+	float: left;
+}
+.palestra .tupla .left{
+	padding-left: 1%;
+	width: 15%;
+}
+
+.palestra .tupla .right{
+	width: 18%;
+}
+
+.palestra .tupla .right p{
+	margin:0;
+}
+
+.palestra .tupla .display_gPropic{
+	float: left;
+	height: 70px;
+	width: 70px;
+	margin: auto 0;
+}
+
+/*
+ * Profilo section
+ */
+
+#profilo{
+	display: block;
+	position: absolute;
+}
+
+/*
+ * Da cancellare per il futuro
+
+#profilo .menu{
+	clear: left;
+	margin-top: auto;
+}
+*/
+.propic, .propic_palestra{
+	width: 120px;
+	height: 120px;
+	border: 5px solid var(--light-transparent-color);
+	background-color: white;
+	box-shadow: 0px 0px 10px;
+	float: left;
+	margin: 7% 17%;
+
+}
+
+/*
+ * Mini form sotto sezione 
+ */
+
+.mini_form {
+	width: 40%;
+	background-color: var(--light-transparent-color);
+	border: 4px inset var(--light-transparent-color);
+	margin: 5% auto;
+	overflow: hidden;
+}
+
+.mini_form ul
+/*.mini_form p*/{
+	margin: 0px;
+	padding: 0 10%;
+	padding-top: 3%;
+}
+
+.mini_form h3{
+	text-align: center;
+}
+
+.mini_form ul li label{
+	display: inline-block;
+	text-align: left;
+	width: 20%;
+}
+
+.mini_form ul li{
+	list-style: none;
+	margin: 2% 0;
+	text-align: left;
+}
+
+.mini_form ul li input{
+	width: 60%;
+	padding: 2%;
+}
+
+.mini_form li small{
+	font-size: 10px;
+}
+
+.mini_form ul li input.botclick{
+	width: auto;
+	font-family: sans-serif;
+	background-color: var(--botclick-bg-color);
+	color: var(--botclick-fg-color);
+	font-weight: bold;
+	border: 1px solid #007dff;
+	border-radius: 5px;
+	margin: 2% 1%;
+	float: right;
+}
+
+.mini_form ul li .botclick:active{
+	background-color: var(--botclick_active-bg-color);
+}
+
+.mini_form ul li textarea{
+	resize: none;
+	width: 100%;
+	height: 75px;
+	padding: 1%;
+}
+
+.mini_form .tupla{
+	box-shadow: none;
+}
+
+.mini_form table{
+	text-align: center;
+	width: 100%;
+}
+
+.mini_form select,
+.mini_form tr td input{
+	text-align: center;
+	font-size: 15px;
+}
+
+.mini_form tr td input[type=time]{
+	padding: 3%;
+}
+
+.mini_form ul li input[type=number]{
+	width: 12%;
+}
+
+/*
+ * Home palestra
+ */
+
+.home_palestra{
+	position: absolute;
+	display: block;
+}
+
+.center{
+	width: 60%;
+	margin: 2% auto;
+	background-color: var(--light-transparent-color);
+	box-shadow: 0px 0px 10px;
+	border: 4px groove var(--light-transparent-color);
+	overflow: auto;
+	padding: 1%;
+}
+
+.center h3, 
+.center h1,
+.center h2,
+.center h4,
+.center h5,
+.center h6{
+	padding-bottom: 1%;
+	margin: 0;
+}
+
+
+.center .top{
+}
+
+.center .right{
+	width: 16%;
+}
+
+.center .corso{
+	width: 100%;
+	clear: both;
+}
+
+.center .slogan{
+	margin-top: 10%;
+}
+
+.center .propic_palestra{
+	width: 100px;
+	height: 100px;
+}
+
+.center .valutazione{
+	float: left;
+	display: block;
+	padding-bottom: 7%;
+}
+
+.center .right input.botclick{
+	font-size: 15px;
+	width: auto;
+	font-family: sans-serif;
+	background-color: var(--botclick-bg-color);
+	color: var(--botclick-fg-color);
+	font-weight: bold;
+	border: 1px solid #007dff;
+	border-radius: 5px;
+	margin: 10% 0;
+	padding: 5%;
+}
+
+.center .right input.botclick:active{
+	background-color: var(--botclick_active-bg-color);
+}
+
+/*
+ * Configurazione delle immagini per le valutazioni
+ */
+
+.valutazione .img0,
+.valutazione .img1,
+.valutazione .img2,
+.valutazione .img3,
+.valutazione .img4{
+	width: 27px;
+	height: 27px;
+	padding: 0 2px;
+	margin: 0px -4px;
+}
