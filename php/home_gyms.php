@@ -40,12 +40,12 @@
 	</div>
 </div>
 <?php
-	if(isset($_GET['2p'])){
-		include_once("php/palestra/".$_GET['2p'].".php");
-	}else{
-		$query = "SELECT * FROM Palestra WHERE ID_Palestra=".$id;
-		$res = $connection->query($query);
-		$row = $res->fetch_assoc();
+if(isset($_GET['2p'])){
+	include_once("php/palestra/".$_GET['2p'].".php");
+}else{
+	$query = "SELECT * FROM Palestra WHERE ID_Palestra=".$id;
+	$res = $connection->query($query);
+	$row = $res->fetch_assoc();
 ?>
 	<div class="center">
 		<div cass="top">
@@ -69,15 +69,15 @@
 				</div>
 			</div>
 			<div class="right">
-<?php			
+<?php
 /*
  * Campo per inserire la propria valutazione, nel caso sia stata gia` inserita
  * verra` modificata
  */
 
-				if(session_status() == PHP_SESSION_NONE){
-					session_start();
-				}
+//				if(session_status() == PHP_SESSION_NONE){
+//					session_start();
+//				}
 				$query="";
 				if(isset($_SESSION['Login']) && $_SESSION['Login']){
 					$query = "
@@ -98,60 +98,61 @@
 				$res = $connection->query($query);
 				if($res)
 					$val = ($res->fetch_assoc())['Valutazione'];
+
+				if(isset($_SESSION['Login']) && $_SESSION['Login']){
 ?>
-				<div class="valutazione" onmouseout="restore(<?php echo $val; ?>)">
+					<div class="valutazione" onmouseout="restore(<?php echo $val; ?>)">
 <?php
-					if(isset($_SESSION['Login']) && $_SESSION['Login']){
 						if(!$val){
-?>
-							<i class="tmp">Valuta la palestra:</i><br />
-<?php					}else{
+?>							<i class="tmp">Valuta la palestra:</i><br />
+<?php
+						}else{
 ?>							<i class="tmp">La tua valutazione è:</i><br />
 <?php
 						}
 						for($i=0; $i<5;++$i){
 							if($i<$val){
-?>								
+?>
 								<img src="images/icon/icon_full.png" alt="valutazione" 
-								class="img<?php echo $i; ?>"
-								onmouseover="seleziona(<?php echo $i; ?>)"
-								onclick="valuta(<?php echo ($i+1).", ".$row['ID_Palestra']; ?>)">
+									class="img<?php echo $i; ?>"
+									onmouseover="seleziona(<?php echo $i; ?>)"
+									onclick="valuta(<?php echo ($i+1).", ".$row['ID_Palestra']; ?>)">
 
 <?php						}else{ 
 ?>
 								<img src="images/icon/icon_clear.png" alt="valutazione" 
-								class="img<?php echo $i; ?>"
-								onmouseover="seleziona(<?php echo $i; ?>)"
-								onclick="valuta(<?php echo ($i+1).", ".$row['ID_Palestra']; ?>)">
+									class="img<?php echo $i; ?>"
+									onmouseover="seleziona(<?php echo $i; ?>)"
+									onclick="valuta(<?php echo ($i+1).", ".$row['ID_Palestra']; ?>)">
 <?php
 							}
 						}
-					}else{
+				}else{
 ?>
-						<i class="tmp">Valutazione media:</i><br />
+					<div class="valutazione">
+							<i class="tmp">Valutazione media:</i><br />
 <?php
-						for($i=0;$i<5;++$i){
-							if($i+1<$val){
-?>								
-								<img src="images/icon/icon_full.png" alt="valutazione" 
-								class="img<?php echo $i; ?>">
-<?php
-							}elseif($i+1-$val<1 && $i+1-floor($val)>=0.5){
+							for($i=0;$i<5;++$i){
+								if($i+1<$val){
 ?>
-								<img src="images/icon/icon_semi.png" alt="valutazione" 
+									<img src="images/icon/icon_full.png" alt="valutazione" 
 									class="img<?php echo $i; ?>">
-<?php						
-							}else{ 
-?>
-								<img src="images/icon/icon_clear.png" alt="valutazione" 
-								class="img<?php echo $i; ?>">
 <?php
-							}
-
-						}
-					}
+								}elseif($i+1-$val<1 && $i+1-floor($val)>=0.5){
 ?>
-				</div>
+									<img src="images/icon/icon_semi.png" alt="valutazione" 
+										class="img<?php echo $i; ?>">
+<?php
+								}else{ 
+?>
+									<img src="images/icon/icon_clear.png" alt="valutazione" 
+									class="img<?php echo $i; ?>">
+<?php
+								}
+							}
+						}
+?>
+					</div>
 <?php
 					if(check_open($row['OrarioApertura'], $row['OrarioChiusura'])){
 						echo "<h3>Aperta</h3>";
@@ -182,53 +183,98 @@
 			</div> <!--fine div right-->
 		</div> <!-- fine div top -->
 	</div>
-	<div class="center">
 <?php
-		$query = "SELECT * FROM Corso WHERE ID_Palestra=".$id;
-		$res = $connection->query($query);
-		while($row = $res->fetch_assoc()){
+	$query = "SELECT * FROM Corso WHERE ID_Palestra=".$id;
+	$res = $connection->query($query);
+
+	if($res && $res->num_rows){
 ?>
-		<div class="tupla">
-			<div class="left">
-				<h3><?php echo $row['Nome']; ?> <h3>
-				<p>
+		<div class="center corso">
+<?php
+			while($row = $res->fetch_assoc()){
+?>
+				<div class="tupla">
+<?php
+					$query = "SELECT Nome, Cognome FROM Persona WHERE ID_Persona=".$row['ID_PersonalTrainer'];
+					$tmp = $connection->query($query);
+					$result = $tmp->fetch_assoc();
+?>
+					<div class="left">
+						<h2><?php echo $row['Nome']; ?> </h2>
+						<span>Personal Trainer: <b> <?php echo $result['Nome']." ".$result['Cognome']; ?> </b></span> 
+						<p>
 <?php 
-				if(is_null($row['Descrizione'])){
-					echo "Questo corso non è ancora provvisto di una descrizione.";
-				}else{
-					echo $row['Descrizione'];
-				}
+						if(is_null($row['Descrizione'])){
+							echo "Questo corso non è ancora provvisto di una descrizione";
+						}else{
+							echo $row['Descrizione'];
+						}
 ?>
-				</p>
-			</div>
-			<div class="right" style="width:40%; text-align: right;">
-				<p><small>
-				Personal Trainer: 
+						</p>
+					</div>
+					<div class="right" style="width:23%; text-align: right;">
 <?php
-				$query = "SELECT Nome, Cognome FROM Persona WHERE ID_Persona=".$row['ID_PersonalTrainer'];
-				$tmp = $connection->query($query);
-				$result = $tmp->fetch_assoc();
-				echo $result['Nome']." ".$result['Cognome'];
+						if(isset($_SESSION['Login']) && $_SESSION['Login']){
+							$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
+								." AND ID_Persona=".$_SESSION['ID'];
+							$tmp = $connection->query($query);
+							if($tmp && !$tmp->num_rows){
+						
 ?>
-				<br />
-				Partecipanti al corso:
+								<form method="POST" action="php/action/iscrizione_corso-process.php">
+									<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
+									<input type="hidden" name="corso" value="<?php echo $row['ID_Corso']; ?>">
+									<input type="submit" class="botclick" name"Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
+								</form>
 <?php
-				$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso'];
-				$tmp = $connection->query($query);
-				$result = $tmp->fetch_assoc();
-				echo $result['Iscritti']."/".$row['LimiteMassimo'];
+							}
+						}
 ?>
-				<br />
-				Quota di iscrizione: <?php echo $row['QuotaIscrizione']; ?>€
-				</small></p>
-			</div>
-		</div>
+						<small><p>
+						Iscritti: 
 <?php
-		} 
+						$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso'];
+						$tmp = $connection->query($query);
+						$result = $tmp->fetch_assoc();
+						echo $result['Iscritti']."/".$row['LimiteMassimo'];
 ?>
-	</div> <!-- fine div center -->
+						<br />
+						Quota di iscrizione: 
+						<?php echo $row['QuotaIscrizione']; ?>€
 <?php
-	}
+						$query = "SELECT * FROM Orario WHERE ID_Corso=".$row['ID_Corso'];
+						$tmp = $connection->query($query);
+						while($day = $tmp->fetch_assoc()){
+							$stamp = "";
+							if($day['Giorno'] === "lunedi"){
+								$stamp = "Lunedì";
+							}elseif($day['Giorno'] === "martedi"){
+								$stamp = "Martedì";
+							}elseif($day['Giorno'] === "mercoledi"){
+								$stamp = "Mercoledì";
+							}elseif($day['Giorno'] === "giovedi"){
+								$stamp = "Giovedì";
+							}elseif($day['Giorno'] === "venerdi"){
+								$stamp = "Venerdì";
+							}elseif($day['Giorno'] === "sabato"){
+								$stamp = "Sabato";
+							}
+?>
+							<br /><?php echo $stamp;?>:
+<?php 						echo date("H:i", strtotime($day['OraInizio']))." - ".
+								date("H:i", strtotime($day['OraFine']));
+						}
+?>
+						</small></p>
+					</div>
+				</div>
+<?php
+			} 
+?>
+		</div> <!-- fine div center -->
+<?php
+	} // Fine if $res
+} // fine else
 ?>
 
 
@@ -237,17 +283,11 @@
 function valuta(valutazione, ID_Palestra) {
 	for(i=0;i<5;++i)
 		document.getElementsByClassName('img'+i)[0].style.display="none";
-//	document.getElementsByClassName('tmp')[0].style.display="none";
 
 	var item = document.getElementsByClassName('tmp')[0];
 	var txt = document.createTextNode("La tua valutazione è "+valutazione);
 	item.replaceChild(txt, item.childNodes[0]);
 
-	//var p = document.createElement('i');
-	//var txt= document.createTextNode("La tua valutazione è "+valutazione);
-	//p.appendChild(txt);
-	//document.getElementsByClassName('valutazione')[0].appendChild(p);
-	//document.getElementsByClassName('valutaizone')[0].style.padding="0 0";	
 	var xhr= new XMLHttpRequest();
 	var data= "val="+valutazione+"&pal="+ID_Palestra;
 	xhr.open("GET", "php/action/valutazione-process.php?"+data, true);

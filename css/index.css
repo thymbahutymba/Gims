@@ -317,7 +317,7 @@ footer small a{
 }
 .palestra .tupla .left{
 	padding-left: 1%;
-	width: 15%;
+	width: 18%;
 }
 
 .palestra .tupla .right{
@@ -472,27 +472,18 @@ footer small a{
 	padding: 1%;
 }
 
-.center h3, 
-.center h1,
-.center h2,
-.center h4,
-.center h5,
-.center h6{
+#container h3, 
+#container h1,
+#container h2,
+#container h4,
+#container h5,
+#container h6{
 	padding-bottom: 1%;
 	margin: 0;
 }
 
-
-.center .top{
-}
-
 .center .right{
-	width: 16%;
-}
-
-.center .corso{
-	width: 100%;
-	clear: both;
+	width: 22%;
 }
 
 .center .slogan{
@@ -525,6 +516,24 @@ footer small a{
 
 .center .right input.botclick:active{
 	background-color: var(--botclick_active-bg-color);
+}
+
+.center .tupla p{
+	margin: 0;
+	padding: 1% 0;
+}
+
+.corso{
+	padding: 0% 1%;
+}
+
+.center .tupla{
+	padding-top: 2%;
+	margin-bottom: 1%;
+	overflow: hidden;
+	display: block;
+	border-bottom: 3px outset var(--light-transparent-color);
+	border-radius: 4px;
 }
 
 /*
