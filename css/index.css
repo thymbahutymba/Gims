@@ -375,8 +375,7 @@ footer small a{
 	overflow: hidden;
 }
 
-.mini_form ul
-/*.mini_form p*/{
+.mini_form ul{
 	margin: 0px;
 	padding: 0 10%;
 	padding-top: 3%;
@@ -429,11 +428,11 @@ footer small a{
 	height: 75px;
 	padding: 1%;
 }
-
+/*
 .mini_form .tupla{
 	box-shadow: none;
 }
-
+*/
 .mini_form table{
 	text-align: center;
 	width: 100%;
@@ -550,3 +549,23 @@ footer small a{
 	padding: 0 2px;
 	margin: 0px -4px;
 }
+
+/*
+ * Immagine per la modifica dei corsi
+ */
+
+
+.corso .modify{
+	width: 25px;
+	height: 25px;
+	padding: 2px;
+	margin: auto 0px;
+	border: 2px outset black;
+	vertical-align: bottom;
+}
+/*
+.corso .tupla .modify:active,
+.corso .tupla .modify:hover{
+	background-color: var(--botclick_active-bg-color);
+	border-color: var(--botclick_active-bg-color)
+}*/

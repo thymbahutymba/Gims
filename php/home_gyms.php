@@ -1,3 +1,4 @@
+<script src="js/home_gyms.js"></script>
 <div class="home_palestra">
 <?php
 	require("php/connect.php");
@@ -192,15 +193,20 @@ if(isset($_GET['2p'])){
 		<div class="center corso">
 <?php
 			while($row = $res->fetch_assoc()){
+				include("php/palestra/modifica_corso.php");
 ?>
-				<div class="tupla">
+				<div class="tupla <?php echo $row['ID_Corso']; ?>">
 <?php
 					$query = "SELECT Nome, Cognome FROM Persona WHERE ID_Persona=".$row['ID_PersonalTrainer'];
 					$tmp = $connection->query($query);
 					$result = $tmp->fetch_assoc();
 ?>
 					<div class="left">
-						<h2><?php echo $row['Nome']; ?> </h2>
+						<div style="padding-bottom: 1%;">
+							<h2 style="display:inline;"><?php echo $row['Nome']; ?></h2>
+							<input type="image" src="images/modify.png" alt="modify" class="modify"
+							onclick="modifica_corso(<?php echo $row['ID_Corso']; ?>)">
+						</div>
 						<span>Personal Trainer: <b> <?php echo $result['Nome']." ".$result['Cognome']; ?> </b></span> 
 						<p>
 <?php 
@@ -222,11 +228,7 @@ if(isset($_GET['2p'])){
 							/*
  							 * Controllo utenti iscritti
  							 */
-							if($row['LimiteMassimo'] == $iscritti){
-?>
-								<i>Il corso è al completo</i>
-<?php
-							}else{
+							if($row['LimiteMassimo'] > $iscritti){
 								$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
 								." AND ID_Persona=".$_SESSION['ID'];
 								$tmp = $connection->query($query);
@@ -288,39 +290,3 @@ if(isset($_GET['2p'])){
 	} // Fine if $res
 } // fine else
 ?>
-
-
-<script>
-<!--
-function valuta(valutazione, ID_Palestra) {
-	for(i=0;i<5;++i)
-		document.getElementsByClassName('img'+i)[0].style.display="none";
-
-	var item = document.getElementsByClassName('tmp')[0];
-	var txt = document.createTextNode("La tua valutazione è "+valutazione);
-	item.replaceChild(txt, item.childNodes[0]);
-
-	var xhr= new XMLHttpRequest();
-	var data= "val="+valutazione+"&pal="+ID_Palestra;
-	xhr.open("GET", "php/action/valutazione-process.php?"+data, true);
-	xhr.send();
-}
-
-function seleziona(valutazione) {
-	for (i=0; i<5; i++){
-		if (i<=valutazione)
-			document.getElementsByClassName('img'+i)[0].src = "images/icon/icon_full.png";
-		else
-			document.getElementsByClassName('img'+i)[0].src = "images/icon/icon_clear.png";
-	}
-}
-function restore(valutazione){
-	for(i=4;i>=0;--i){
-		if(i>=valutazione)
-			document.getElementsByClassName('img'+i)[0].src="images/icon/icon_clear.png";
-		else
-			document.getElementsByClassName('img'+i)[0].src="images/icon/icon_full.png";
-	}
-}
--->
-</script>
