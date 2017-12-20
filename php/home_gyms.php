@@ -218,6 +218,9 @@ if(isset($_GET['2p'])){
 							$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
 								." AND ID_Persona=".$_SESSION['ID'];
 							$tmp = $connection->query($query);
+							/*
+ 							 * Controllo se utente già iscritto al corso
+ 							 */
 							if($tmp && !$tmp->num_rows){
 						
 ?>
