@@ -214,32 +214,41 @@ if(isset($_GET['2p'])){
 					</div>
 					<div class="right" style="width:23%; text-align: right;">
 <?php
+						$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso'];
+						$tmp = $connection->query($query);
+						$iscritti = ($tmp->fetch_assoc())['Iscritti'];
+
 						if(isset($_SESSION['Login']) && $_SESSION['Login']){
-							$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
-								." AND ID_Persona=".$_SESSION['ID'];
-							$tmp = $connection->query($query);
 							/*
- 							 * Controllo se utente già iscritto al corso
+ 							 * Controllo utenti iscritti
  							 */
-							if($tmp && !$tmp->num_rows){
-						
+							if($row['LimiteMassimo'] == $iscritti){
 ?>
-								<form method="POST" action="php/action/iscrizione_corso-process.php">
-									<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
-									<input type="hidden" name="corso" value="<?php echo $row['ID_Corso']; ?>">
-									<input type="submit" class="botclick" name"Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
-								</form>
+								<i>Il corso è al completo</i>
 <?php
+							}else{
+								$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
+								." AND ID_Persona=".$_SESSION['ID'];
+								$tmp = $connection->query($query);
+								/*
+ 								 * Controllo se utente già iscritto al corso
+ 								 */
+								if($tmp && !$tmp->num_rows){
+?>
+									<form method="POST" action="php/action/iscrizione_corso-process.php">
+										<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
+										<input type="hidden" name="corso" value="<?php echo $row['ID_Corso']; ?>">
+										<input type="submit" class="botclick" name"Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
+									</form>
+<?php
+								}
 							}
 						}
 ?>
 						<small><p>
 						Iscritti: 
 <?php
-						$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso'];
-						$tmp = $connection->query($query);
-						$result = $tmp->fetch_assoc();
-						echo $result['Iscritti']."/".$row['LimiteMassimo'];
+						echo $iscritti."/".$row['LimiteMassimo'];
 ?>
 						<br />
 						Quota di iscrizione: 

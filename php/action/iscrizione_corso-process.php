@@ -24,6 +24,17 @@ $query = "SELECT Nome FROM Corso WHERE ID_Corso=".$_POST['corso'];
 $result = $connection->query($query);
 $nome = ($result->fetch_assoc())['Nome'];
 
+$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$_POST['corso'];
+$result = $connection->query($query);
+$iscritti = ($result->fetch_assoc())['Iscritti'];
+
+$query = "SELECT LimiteMassimo FROM Corso WHERE ID_Corso=".$_POST['corso'];
+$result = $connection->query($query);
+if($iscritti == ($result->fetch_assoc())['LimiteMassimo']){
+	$page['id'] = $_POST['Palestra'];
+	send_message($page, "Il corso ha raggiunto il limite massimo, impossibile iscriversi");
+}
+
 $query = "INSERT INTO Partecipazione(ID_Persona, ID_Corso) ".
 	"values(".$_SESSION['ID'].", ".$_POST['corso'].")";
 $connection->query($query);
