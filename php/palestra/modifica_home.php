@@ -20,7 +20,7 @@ if($res->num_rows===0){
 }
 ?>
 
-<div class="mini_form">
+<div class="mini_form mod_home">
 	<form method="POST" action="php/action/modifica_home-process.php">
 		<ul>
 			<li>Componi la descrizione per la tua palestra con uno slogan principale.</li>

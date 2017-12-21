@@ -32,7 +32,7 @@
 		<ul>
 			<li>Nome del corso <input type="text" name="nome" required></li>
 			<li>
-				<label style="width: 35%;">Personal Trainer</label>
+				<label>Personal Trainer</label>
 				<select class="tendina" name="pt" required>
 					<?php
 						while($row = $res->fetch_assoc()){
@@ -42,11 +42,11 @@
 				</select>
 			</li>
 			<li>
-				<label style="width:35%;">Numero massimo iscritti </label>
+				<label>Numero massimo iscritti </label>
 				<input type="number" name="max" required>
 			</li>
 			<li>
-				<label style="width: 35%;">Quota Iscrizione </label>
+				<label>Quota Iscrizione </label>
 				<input type="number" name="money" step="0.01" required> €
 			</li>
 			<table class="orari">
@@ -69,11 +69,14 @@
 				</tr>
 			</table>
 			<li><input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>"></li>
-			<li>
-				<input type="button" class="botclick" style="float: left" onclick="aggiungi_orario()" value="Aggiungi Orario"/>
-				<input type="button" class="botclick" style="float: left" onclick="rimuovi_orario()" value="Rimuovi Orario"/></li>
-			<li><input type="reset" class="botclick" name="Reset" value="Reset">
-			<input type="submit" class="botclick" name="Inserisci" value="Inserisci"></li>
+			<div class="left">
+				<input type="button" class="botclick" onclick="aggiungi_orario()" value="Aggiungi Orario"/>
+				<input type="button" class="botclick" onclick="rimuovi_orario()" value="Rimuovi Orario"/>
+			</div>
+			<div class="right">
+				<input type="reset" class="botclick" name="Reset" value="Reset">
+				<input type="submit" class="botclick" name="Inserisci" value="Inserisci">
+			</div>
 		</ul>
 	</form>
 </div>

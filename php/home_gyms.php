@@ -202,10 +202,16 @@ if(isset($_GET['2p'])){
 					$result = $tmp->fetch_assoc();
 ?>
 					<div class="left">
-						<div style="padding-bottom: 1%;">
-							<h2 style="display:inline;"><?php echo $row['Nome']; ?></h2>
-							<input type="image" src="images/modify.png" alt="modify" class="modify"
+						<div>
+							<h2><?php echo $row['Nome']; ?></h2>
+<?php
+							if(isset($_SESSION['Login']) && get_qualifica($connection, $_GET['id'])<=Qualifica::Segretario){
+?>
+								<input type="image" src="images/modify.png" alt="modify" class="modify"
 							onclick="modifica_corso(<?php echo $row['ID_Corso']; ?>)">
+<?php
+							}
+?>
 						</div>
 						<span>Personal Trainer: <b> <?php echo $result['Nome']." ".$result['Cognome']; ?> </b></span> 
 						<p>

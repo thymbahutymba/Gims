@@ -44,30 +44,30 @@
 		$rows = $res->fetch_assoc();
 ?>
 
-	<div class="mini_form">
+	<div class="mini_form prof">
 		<form method="POST" action="php/action/modifica_profilo-process.php">
-			<h3>Modifica Nome e Cognome</h3>
-				<ul>
-					<li>
-						<label>Nome: </label>
-						<input type="text" name="nome" placeholder="<?php echo $rows['Nome']; ?>" required>
-					</li>
-					<li>
-						<label>Cognome: </label>
-						<input type="text" name="cognome" placeholder="<?php echo $rows['Cognome']; ?>" required>
-					</li>
-					<li><input type="submit" class="botclick" name="modCn" value="Conferma"></li>
-				</ul>
+			<h2>Modifica Nome e Cognome</h2>
+			<ul>
+				<li>
+					<label>Nome: </label>
+					<input type="text" name="nome" placeholder="<?php echo $rows['Nome']; ?>" required>
+				</li>
+				<li>
+					<label>Cognome: </label>
+					<input type="text" name="cognome" placeholder="<?php echo $rows['Cognome']; ?>" required>
+				</li>
+				<li><input type="submit" class="botclick" name="modCn" value="Conferma"></li>
+			</ul>
 		</form>
 	</div>
 
-	<div class="mini_form">
+	<div class="mini_form prof">
 		<form action="php/action/modifica_profilo-process.php" method="post" enctype="multipart/form-data">
-			<h3>Modifica Immagine del profilo</h3>
-			<p>
-				Scegli l'immagine che vuoi caricare, dimensione massima 2MiB.
-			</p>
+			<h2>Modifica Immagine del profilo</h2>
 			<ul>
+				<li><p>
+					Scegli l'immagine che vuoi caricare, dimensione massima 2MiB.
+				</p></li>
 				<li>
 					<input type="file" name="propic" accept="image/*">
 					<input class="botclick" type="submit" name="modPropic" value="Conferma">
@@ -76,16 +76,16 @@
 		</form>
 	</div>
 
-	<div class="mini_form">
+	<div class="mini_form prof">
 		<form method="POST" action="php/action/modifica_profilo-process.php">
-			<h3>Modifica Email</h3>
-			<p>Dopo aver modificato l'email sarà necessario rieffettuare il login.</p>
+			<h2>Modifica Email</h2>
 			<ul>
+				<li><p>Dopo aver modificato l'email sarà necessario rieffettuare il login.</p></li>
 				<li>
 					<label>Email: </label>
 					<input type="email" name="email" placeholder="<?php echo $rows['Email']; ?>" required>
 				</li>
-				<li><small><i>Per poter modificare l'email è necessario inserire la password</small></i></li>
+				<li><small><i>Per poter modificare l'email è necessario inserire la <b>password</b></i></small></li>
 				<li>
 					<label>Password: </label>
 					<input type="password" name="psw" placeholder="Inserisci la password">
@@ -95,11 +95,11 @@
 		</form>
 	</div>
 
-	<div class="mini_form">
+	<div class="mini_form prof">
 		<form method="POST" action="php/action/modifica_profilo-process.php">
-			<h3>Modifica Password</h3>
-			<p>Inserisci la password corrente, poi scegli la nuova password e confermala.</p>
+			<h2>Modifica Password</h2>
 			<ul>
+				<li><p>Inserisci la password corrente, poi scegli la nuova password e confermala.</p></li>
 				<li>
 					<label>Password: </label>
 					<input type="password" name="curPsw" placeholder="Password corrente">
@@ -109,8 +109,8 @@
 					<input type="password" name="newPsw" placeholder="Nuova password">
 				</li>
 				<li>
-					<label>Conferma: </label>
-					<input type="password" name="2newPsw" placeholder="Conferma password">
+					<label>Ripeti:</label>
+					<input type="password" name="2newPsw" placeholder="Ripeti password">
 				</li>
 				<li><input type="submit" class="botclick" name="modPsw" value="Conferma"></li>
 			</ul>
@@ -120,13 +120,11 @@
 <?php
 	}elseif(isset($_GET['2p']) && $_GET['2p'] == "cancella_account"){
 ?>
-	<div class="mini_form">
+	<div class="mini_form prof">
 		<form method="POST" action="php/action/cancella_account-process.php">
-			<h3>Cancella il tuo account</h3>
-			<p style="text-align: justify;">
-				La cancellazione è permanente e non potrà essere annullata.
-			</p>
+			<h2>Cancella il tuo account</h2>
 			<ul>
+				<li><p>La cancellazione è permanente e non potrà essere annullata.</p></li>
 				<li>Password <input type="password" name="psw"></li>
 				<li><input type="submit" class="botclick" name="mod_psw" value="Conferma"></li>
 			</ul>

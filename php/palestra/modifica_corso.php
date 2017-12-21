@@ -9,6 +9,11 @@
 	border-radius: 4px;
 }
 
+.mod_corso<?php echo $row['ID_Corso'];?> .left,
+.mod_corso<?php echo $row['ID_Corso'];?> .right{
+	width: 50%;
+}
+
 .mod_corso<?php echo $row['ID_Corso'];?> .right input.botclick,
 .mod_corso<?php echo $row['ID_Corso'];?> .mod_form input.botclick{
 	padding: 2%;
@@ -17,8 +22,8 @@
 }
 
 .mod_corso<?php echo $row['ID_Corso'];?> form.mod_form{
-	margin: 1% 0;
-	width: 90%;
+	margin: 1% auto;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -36,6 +41,10 @@
 	clear:both;
 	width:50%;
 }
+
+.orari td{
+	text-align: center;
+} 
 
 .mod_corso<?php echo $row['ID_Corso'];?> ul{
 	padding: 0;
@@ -75,7 +84,7 @@ $dati = $result->fetch_assoc();
 
 <div class="mod_corso<?php echo $row['ID_Corso'];?>">
 	<form method="POST" action="php/action/mod_corso-process.php">
-		<div class="left" style="width: 50%;">
+		<div class="left">
 			<ul>
 				<li>
 					<label>Nome del corso</label><!--
@@ -105,7 +114,7 @@ $dati = $result->fetch_assoc();
 				</li>
 			</ul>
 		</div>
-		<div class="right" style="width: 50%;">
+		<div class="right">
 			<ul>
 				<li>
 					<label>Numero massimo iscritti </label>
@@ -118,15 +127,29 @@ $dati = $result->fetch_assoc();
 				</li>
 			</ul>
 		</div>
+		<div>
 <?php
 $query = "SELECT * FROM Orario WHERE ID_Corso=".$dati['ID_Corso'];
 $result = $connection->query($query);
+		if($dati['Descrizione']==NULL){
 ?>
+			<textarea maxlength="20000" name="text" placeholder="Scrivi una descrizione per il corso." required></textarea>
+<?php
+		}else{
+?>
+			<textarea maxlength="20000" name="text" placeholder="<?php echo $dati['Descrizione']; ?>"></textarea>
+			<p align="center"><font color="darkred">
+				<i><b>Non modificare le descrizione se vuoi lasciarla invariata</b></i>
+			</font></p>
+<?php
+		}
+?>
+		</div>
 		<table class="orari left table<?php echo $row['ID_Corso'];?>">
 			<tr>
-				<td style="text-align: center;">Giorno</td>
-				<td style="text-align: center;">Ora Inizio</td>
-				<td style="text-align: center;">Ora Fine</td>
+				<td>Giorno</td>
+				<td>Ora Inizio</td>
+				<td>Ora Fine</td>
 			</tr>
 <?php
 			while($day = $result->fetch_assoc()){
@@ -163,7 +186,7 @@ $result = $connection->query($query);
 	<form method="POST" class="mod_form" action="php/action/elimina_corso-process.php">
 		<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 		<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
-			<span>L'eliminazione del corso eliminerà tutto gli orari
+			<span><i>L'eliminazione del corso eliminerà tutti gli <b>orari</b> e le <b>iscrizioni</b> degli atleti</i>
 		<input type="submit" class="botclick" name="Elimina" value="Elimina"></span>
 	</form>
 </div>
