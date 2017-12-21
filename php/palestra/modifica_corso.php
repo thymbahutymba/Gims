@@ -97,18 +97,19 @@ $dati = $result->fetch_assoc();
 				$pt = $result->fetch_assoc();
 ?>
 				<li>
-					<label>Personal Trainer</label><select name="pt" required>
+					<label>Personal Trainer</label><!--
+					--><select name="pt" required>
 <?php
-					$query = "SELECT P.ID_Persona, P.Nome, P.Cognome FROM Persona P NATURAL JOIN Dispone D
-						WHERE D.ID_Palestra=".$_GET['id']." AND D.Qualifica=".Qualifica::Personal_Trainer;
-					$result = $connection->query($query);
-					while($tmp = $result->fetch_assoc()){
-						if($tmp['ID_persona'] == $pt['ID_Persona']){
-							echo "<option value=\"".$pt['ID_Persona']."\" selected>".$pt['Cognome']." ".$pt['Nome']."</option>";
-						}else{
-							echo "<option value=\"".$tmp['ID_Persona']."\">".$tmp['Cognome']." ".$tmp['Nome']."</option>";
+						$query = "SELECT P.ID_Persona, P.Nome, P.Cognome FROM Persona P NATURAL JOIN Dispone D
+							WHERE D.ID_Palestra=".$_GET['id']." AND D.Qualifica=".Qualifica::Personal_Trainer;
+						$result = $connection->query($query);
+						while($tmp = $result->fetch_assoc()){
+							if($tmp['ID_persona'] == $pt['ID_Persona']){
+								echo "<option value=\"".$pt['ID_Persona']."\" selected>".$pt['Cognome']." ".$pt['Nome']."</option>";
+							}else{
+								echo "<option value=\"".$tmp['ID_Persona']."\">".$tmp['Cognome']." ".$tmp['Nome']."</option>";
+							}
 						}
-					}
 ?>
 					</select>
 				</li>
@@ -133,11 +134,11 @@ $query = "SELECT * FROM Orario WHERE ID_Corso=".$dati['ID_Corso'];
 $result = $connection->query($query);
 		if($dati['Descrizione']==NULL){
 ?>
-			<textarea maxlength="20000" name="text" placeholder="Scrivi una descrizione per il corso." required></textarea>
+			<textarea maxlength="20000" name="desc" placeholder="Scrivi una descrizione per il corso."></textarea>
 <?php
 		}else{
 ?>
-			<textarea maxlength="20000" name="text" placeholder="<?php echo $dati['Descrizione']; ?>"></textarea>
+			<textarea maxlength="20000" name="desc"><?php echo $dati['Descrizione']; ?></textarea>
 			<p align="center"><font color="darkred">
 				<i><b>Non modificare le descrizione se vuoi lasciarla invariata</b></i>
 			</font></p>
@@ -173,6 +174,8 @@ $result = $connection->query($query);
 ?>
 		</table>
 		<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
+
+		<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 		<div class="right" style="width: 40%; margin-top: 2%;">
 				<input type="button" class="botclick" onclick="aggiungi_orario(<?php echo $row['ID_Corso'];?>)" value="Aggiungi Orario"/>
 				<input type="button" class="botclick" onclick="rimuovi_orario(<?php echo $row['ID_Corso']; ?>)" value="Rimuovi Orario"/><br />
