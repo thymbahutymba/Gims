@@ -18,14 +18,36 @@ if($res->num_rows===0){
 }elseif(get_qualifica($connection, $_GET['id'])>Qualifica::Segretario){
 		send_message($page, "Non hai i permessi necessari per l\'inserimento dei corsi.");
 }
+
+$query = "SELECT Slogan, Descrizione FROM Palestra WHERE ID_Palestra=".$_GET['id'];
+$result = $connection->query($query);
+$valori = $result->fetch_assoc();
 ?>
 
 <div class="mini_form mod_home">
 	<form method="POST" action="php/action/modifica_home-process.php">
 		<ul>
-			<li>Componi la descrizione per la tua palestra con uno slogan principale.</li>
-			<li>Slogan <input type="text" name="slogan" value=""></li>
-			<li><textarea maxlength="20000" name="text" placeholder="Scrivi una descrizione." required></textarea></li>
+			<li>
+				<p>
+					Componi la descrizione per la tua palestra con uno slogan principale.<br />
+					<i>Se desideri <b>cancellare</b> lo Slogan e/o la Descrizione cancella
+						il contenuto dei seguenti campi.</i>
+				</p>
+			</li>
+			<li>Slogan <input type="text" name="slogan" value="<?php if(!empty($valori['Slogan'])) echo $valori['Slogan'];?>"></li>
+			<li>
+<?php
+				if(empty($valori['Descrizione'])){
+?>
+					<textarea maxlength="20000" name="text" placeholder="Scrivi una descrizione."></textarea>
+<?php
+				}else{
+?>
+					<textarea maxlength="20000" name="text"><?php echo $valori['Descrizione'];?></textarea>
+<?php
+				}
+?>
+			</li>
 			<li><input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>"></li>
 			<li>
 				<input type="reset" class="botclick" name="Reset" value="Reset">

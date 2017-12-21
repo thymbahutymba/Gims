@@ -34,6 +34,8 @@
 
 	if(!empty($p_desc))
 		$query .= ", C.Descrizione='".$p_desc."'";
+	else
+		$query .= ", C.Descrizione=NULL";
 	$query .= " WHERE C.ID_Corso=".$p_idCorso;
 
 	$connection->query($query) or die($connection->error);

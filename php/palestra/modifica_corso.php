@@ -182,14 +182,14 @@ $result = $connection->query($query);
 		</div>
 		<div class="mod_form">
 			<input type="button" class="botclick left" value="Indietro" onclick="goback(<?php echo $row['ID_Corso']; ?>)">
-			<input type="reset" class="botclick right" name="Reset" value="Reset">
 			<input type="submit" class="botclick right" name="Modifica" value="Modifica">
+			<input type="reset" class="botclick right" name="Reset" value="Reset">
 		</div>
 	</form>
 	<form method="POST" class="mod_form" action="php/action/elimina_corso-process.php">
 		<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 		<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
-			<span><i>L'eliminazione del corso eliminerà tutti gli <b>orari</b> e le <b>iscrizioni</b> degli atleti</i>
+			<span><i>L'eliminazione del corso cancellerà tutti gli <b>orari</b> e le <b>iscrizioni</b> degli atleti</i>
 		<input type="submit" class="botclick" name="Elimina" value="Elimina"></span>
 	</form>
 </div>

@@ -15,7 +15,18 @@
 		send_message($page, "Lo slogan contiene caratteri non ammessi.");
 	}
 
-	$query = "UPDATE Palestra SET Descrizione='".$p_text."', Slogan='".$p_slogan."' ";
+	$query = "UPDATE Palestra SET ";
+	if(empty($p_text)){
+		$query .= "Descrizione=NULL ";
+	}else{
+		$query .= "Descrizione='".$p_text."'";
+	}
+	
+	if(empty($p_slogan)){
+		$query .= ", Slogan=NULL ";
+	}else{
+		$query .= ", Slogan='".$p_slogan."' ";
+	}
 	$query .= "WHERE ID_Palestra=".$p_idPalestra;
 
 	$connection->query($query);
