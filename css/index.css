@@ -500,7 +500,7 @@ footer small a{
 	padding-bottom: 7%;
 }
 
-.center .right input.botclick{
+.center input.botclick{
 	font-size: 15px;
 	width: auto;
 	font-family: sans-serif;
@@ -513,7 +513,7 @@ footer small a{
 	padding: 5%;
 }
 
-.center .right input.botclick:active{
+.center input.botclick:active{
 	background-color: var(--botclick_active-bg-color);
 }
 

@@ -32,13 +32,13 @@ function restore(valutazione){
 function modifica_corso(corso){
 	var t1 = document.getElementsByClassName(corso)[0];
 	t1.style.display="none";
-	var t2 = document.getElementsByClassName('tupla'+corso)[0];
+	var t2 = document.getElementsByClassName('mod_corso'+corso)[0];
 	t2.style.display="inline-block";
 }
 
 function goback(corso){
 	var t1 = document.getElementsByClassName(corso)[0];
 	t1.style.display="block";
-	var t2 = document.getElementsByClassName('tupla'+corso)[0];
+	var t2 = document.getElementsByClassName('mod_corso'+corso)[0];
 	t2.style.display="none";
 }

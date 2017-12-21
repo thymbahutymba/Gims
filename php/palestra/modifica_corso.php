@@ -1,5 +1,5 @@
 <style>
-.tupla<?php echo $row['ID_Corso'];?>{
+.mod_corso<?php echo $row['ID_Corso'];?>{
 	display: none;
 	width: 100%;
 	background-color: unset;
@@ -9,40 +9,63 @@
 	border-radius: 4px;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> .right input.botclick{
+.mod_corso<?php echo $row['ID_Corso'];?> .right input.botclick,
+.mod_corso<?php echo $row['ID_Corso'];?> .mod_form input.botclick{
 	padding: 2%;
 	margin: 1%;
 	display: inline-block;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> ul{
+.mod_corso<?php echo $row['ID_Corso'];?> form.mod_form{
+	margin: 1% 0;
+	width: 90%;
+	display: inline-block;
+}
+
+.mod_corso<?php echo $row['ID_Corso'];?> form.mod_form p{
+	text-align: left;
+}
+
+.mod_corso<?php echo $row['ID_Corso'];?> form.mod_form input.botclick{
+	padding: 1%;
+}
+
+.mod_corso<?php echo $row['ID_Corso'];?> .mod_form{
+	margin: 0 auto;
+	text-align: center;
+	clear:both;
+	width:50%;
+}
+
+.mod_corso<?php echo $row['ID_Corso'];?> ul{
 	padding: 0;
 }
-.tupla<?php echo $row['ID_Corso'];?> ul li{
+.mod_corso<?php echo $row['ID_Corso'];?> ul li{
 	list-style: none;
 	padding: 1% 0;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> ul li label{
+.mod_corso<?php echo $row['ID_Corso'];?> ul li label{
 	display: inline-block;
 	width: 40%;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> .right ul li label{
+.mod_corso<?php echo $row['ID_Corso'];?> .right ul li label{
 	width: 65%;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> .right ul li input[type=number]{
+.mod_corso<?php echo $row['ID_Corso'];?> .right ul li input[type=number]{
 	width: 15%;
 	padding: 2%;
 }
 
-.tupla<?php echo $row['ID_Corso'];?> ul li input,
-.tupla<?php echo $row['ID_Corso'];?> ul li select
+.mod_corso<?php echo $row['ID_Corso'];?> ul li input,
+.mod_corso<?php echo $row['ID_Corso'];?> ul li select
 {
 	padding: 0;
 }
 </style>
+
 <script src="js/modifica_orario.js"></script>
 <?php
 $query = "SELECT * FROM Corso WHERE ID_Corso=".$row['ID_Corso'];
@@ -50,11 +73,14 @@ $result = $connection->query($query);
 $dati = $result->fetch_assoc();
 ?>
 
-<div class="tupla<?php echo $row['ID_Corso'];?>">
+<div class="mod_corso<?php echo $row['ID_Corso'];?>">
 	<form method="POST" action="php/action/mod_corso-process.php">
 		<div class="left" style="width: 50%;">
 			<ul>
-				<li><label>Nome del corso </label><input type="text" name="nome" value="<?php echo $row['Nome']; ?>"></li>
+				<li>
+					<label>Nome del corso</label><!--
+				--><input type="text" name="nome" value="<?php echo $row['Nome']; ?>">
+				</li>
 <?php
 				$query = "SELECT * FROM Persona WHERE ID_Persona= 
 					(SELECT ID_PersonalTrainer FROM Corso WHERE ID_Corso=".$row['ID_Corso'].")";
@@ -98,7 +124,9 @@ $result = $connection->query($query);
 ?>
 		<table class="orari left table<?php echo $row['ID_Corso'];?>">
 			<tr>
-			<td>Giorno</td><td>Ora Inizio</td><td>Ora Fine</td>
+				<td style="text-align: center;">Giorno</td>
+				<td style="text-align: center;">Ora Inizio</td>
+				<td style="text-align: center;">Ora Fine</td>
 			</tr>
 <?php
 			while($day = $result->fetch_assoc()){
@@ -121,27 +149,35 @@ $result = $connection->query($query);
 			}
 ?>
 		</table>
+		<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
 		<div class="right" style="width: 40%; margin-top: 2%;">
-				<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
 				<input type="button" class="botclick" onclick="aggiungi_orario(<?php echo $row['ID_Corso'];?>)" value="Aggiungi Orario"/>
 				<input type="button" class="botclick" onclick="rimuovi_orario(<?php echo $row['ID_Corso']; ?>)" value="Rimuovi Orario"/><br />
-				<input type="reset" class="botclick" name="Reset" value="Reset">
-				<input type="submit" class="botclick" name="Inserisci" value="Inserisci">
-				<input type="button" class="botclick" value="Indietro" onclick="goback(<?php echo $row['ID_Corso']; ?>)">
 		</div>
+		<div class="mod_form">
+			<input type="button" class="botclick left" value="Indietro" onclick="goback(<?php echo $row['ID_Corso']; ?>)">
+			<input type="reset" class="botclick right" name="Reset" value="Reset">
+			<input type="submit" class="botclick right" name="Modifica" value="Modifica">
+		</div>
+	</form>
+	<form method="POST" class="mod_form" action="php/action/elimina_corso-process.php">
+		<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
+		<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
+			<span>L'eliminazione del corso eliminerà tutto gli orari
+		<input type="submit" class="botclick" name="Elimina" value="Elimina"></span>
 	</form>
 </div>
 
 <script>
 <!--
 	function aggiungi_orario(corso) {
-	var riga = document.getElementsByClassName("table"+corso)[0].getElementsByClassName("giornata")[0];
+	var riga = document.getElementsByClassName('table'+corso)[0].getElementsByClassName("giornata")[0];
 	var cln = riga.cloneNode(true);
-	document.getElementsByClassName("table"+corso)[0].appendChild(cln);
+	document.getElementsByClassName('table'+corso)[0].appendChild(cln);
 }
 
 function rimuovi_orario(corso) {
-	var table=document.getElementsByClassName("table"+corso)[0];
+	var table=document.getElementsByClassName('table'+corso)[0];
 	if(table.rows.length>2){
 		table.deleteRow(-1);
 	}else{
