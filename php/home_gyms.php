@@ -55,19 +55,6 @@ if(isset($_GET['2p'])){
 				<h3><?php echo $row['Citta']; ?> </h3>
 				<span>Contattaci all' <b><i><a href="mailto:<?php echo $row['Email']; ?>">Email</a></i></b>
 					oppure chiamaci al <?php echo $row['Telefono']; ?></span>
-				<div class="slogan">
-<?php
-					if($row['Slogan'] !== NULL && $row['Descrizione']!==NULL){
-?>
-						<h3><?php echo $row['Slogan']; ?></h3>
-						<p><?php echo $row['Descrizione']; ?></p>
-<?php				}else{
-?>						<p>Questa palestra non è ancora provvista di uno slogan e di una
-							descrizione.</p>
-<?php
-					}
-?>
-				</div>
 			</div>
 			<div class="right">
 <?php
@@ -183,6 +170,19 @@ if(isset($_GET['2p'])){
 ?>
 			</div> <!--fine div right-->
 		</div> <!-- fine div top -->
+		<div class="slogan">
+<?php
+				if($row['Slogan'] !== NULL && $row['Descrizione']!==NULL){
+?>
+					<h3><?php echo $row['Slogan']; ?></h3>
+					<p><?php echo $row['Descrizione']; ?></p>
+<?php			}else{
+?>					<p>Questa palestra non è ancora provvista di uno slogan e di una
+						descrizione.</p>
+<?php
+				}
+?>
+		</div>
 	</div>
 <?php
 	$query = "SELECT * FROM Corso WHERE ID_Palestra=".$id;
@@ -224,7 +224,7 @@ if(isset($_GET['2p'])){
 ?>
 						</p>
 					</div>
-					<div class="right" style="width:23%; text-align: right;">
+					<div class="right">
 <?php
 						$query = "SELECT count(*) as Iscritti FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso'];
 						$tmp = $connection->query($query);

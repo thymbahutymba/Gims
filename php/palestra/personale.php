@@ -25,8 +25,7 @@
 	<div class="existing_user">
 		<form method="POST" action="php/action/aggiungi_personale-process.php">
 			<input type="button" class="botclick" value="Nuovo Utente" onclick="cambia_form()"> 
-			<p><i>Seleziona l'email dell'utente per assumerlo, se non è registrato
-				 crea per lui un nuovo account tramite il tasto soprastante
+			<p><i>Seleziona l'email dell'utente per assumerlo, se è registrato
 			</i></p> 
 			<ul class="ul">
 				<li>
@@ -34,6 +33,7 @@
 						<option selected disabled>Email</option>
 <?php
 						$query = "SELECT * FROM Persona WHERE ID_Persona<>".$_SESSION['ID'];
+						$query .= " ORDER BY Email";
 						$result = $connection->query($query);
 						while($row = $result->fetch_assoc()){
 ?>
@@ -74,10 +74,8 @@
 	</div>
 	<div class="new_user">
 		<form method="POST" action="php/action/aggiungi_personale-process.php">
-			<input type="button" class="botclick button" value="Utente Esistente" onclick="cambia_form()">
-			<p><i>Crea un nuovo account per il tuo dipendente, se è già registrato
-				potrai selezionare il suo account tramite il tasto soprastante
-			</i></p> 
+			<input type="button" class="botclick button" value="Utente già iscritto" onclick="cambia_form()">
+			<p><i>Crea un nuovo account per il tuo dipendente</i></p> 
 			<ul>
 				<li><input type="text" name="nome" placeholder="Inserisci il nome" required></li>
 				<li><input type="text" name="cognome" placeholder="Inserisci il cognome" required></li>
@@ -88,6 +86,8 @@
 						<option value="<?php echo Qualifica::Segretario; ?>">Segretario</option>
 						<option value="<?php echo Qualifica::Admin; ?>">Admin</option>
 					</select>
+				</li>
+				<li>
 					Maschio<input class="botclick" type="radio" name="sesso" value="Maschio" required>
 					Femmina<input class="botclick" type="radio" name="sesso" value="Femmina" required>
 				</li>

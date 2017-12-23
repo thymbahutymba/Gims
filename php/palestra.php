@@ -2,19 +2,30 @@
 	require("php/utility.php");
 	check_login();
 ?>
-<div class="menu_profilo" style="margin: 5% 0;">
-<!--<div class="menu">-->
-	<ul>
-		<li><a href="index.php?p=palestra&2p=gestisci">Gestisci</a></li>
+<!--
+<div class="menu_profilo">
+	<ul style="margin: 0 auto; text-align:center; display: inline-block">
 		<li><a href="index.php?p=palestra&2p=aggiungi_palestra">Aggiungi</a></li>
 	</ul>
 </div>
-
+-->
 <?php
-if(isset($_GET['2p']) && $_GET["2p"]=="gestisci"){ 
+if(!isset($_GET['2p'])){ 
 ?>
-<div class="palestra">
+<div class="center">
+	<p>
+	In questa pagina visualizzi tutte le palestre di cui sei amministratore, se non
+	ne possiedi potrai aggiungerle con l'apposito form cliccando sul tasto aggiungi
+	</p>
+	<div class="menu_profilo">
+		<ul>
+		<!--<li><a href="index.php?p=palestra&2p=gestisci">Gestisci</a></li>-->
+		<li><a href="index.php?p=palestra&2p=aggiungi_palestra">Aggiungi</a></li>
+		</ul>
+	</div>
+</div>
 
+<div class="palestra">
 <?php
 	require_once("php/connect.php");
 	require_once("php/utility.php");

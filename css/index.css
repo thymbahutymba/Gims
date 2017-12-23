@@ -73,6 +73,16 @@ a{
 	color: black;
 }
 
+textarea{
+	resize: none;
+	width: 98%;
+	height: 75px;
+	margin: 0 auto;
+	padding: 1%;
+	border: none;
+	margin: 1% 0;
+}
+
 #navbar {
 	font-size: 20px;
 	float: right;
@@ -281,19 +291,20 @@ footer small a{
  */
 
 .palestra{
-	margin: 3% auto;
-	background-color: var(--light-transparent-color);
+	margin: 2% auto;
 	width: 60%;
+	background-color: var(--light-transparent-color);
 }
 
 .palestra .tupla {
-	width: 100%;
-	border: 2px thick var(--light-transparent-color);
-	box-shadow:	0px 0px 10px;
+	width: 98%;
+	box-shadow: 0px 0px 10px;
 	padding: 1%;
 	display: block;
 	overflow: hidden;
+
 }
+
 
 .palestra .tupla .left h2,
 .palestra .tupla .left p{
@@ -313,7 +324,7 @@ footer small a{
 	width: 18%;
 }
 
-.palestra .tupla .right p{
+.palestra .tupla.right p{
 	margin:0;
 }
 
@@ -416,15 +427,6 @@ footer small a{
 	background-color: var(--botclick_active-bg-color);
 }
 
-textarea{
-	resize: none;
-	width: 98%;
-	height: 75px;
-	margin: 0 auto;
-	padding: 1%;
-	border: none;
-}
-
 .mini_form table{
 	text-align: center;
 	width: 100%;
@@ -503,7 +505,12 @@ textarea{
 }
 
 .center .slogan{
-	margin-top: 10%;
+	clear: both;
+}
+
+.center .slogan p{
+	margin: 0;
+	text-align: justify;
 }
 
 .center .propic_palestra{
@@ -515,6 +522,10 @@ textarea{
 	float: left;
 	display: block;
 	padding-bottom: 7%;
+}
+
+.center .right p{
+	margin: 5% 0;
 }
 
 .center input.botclick{
@@ -534,15 +545,6 @@ textarea{
 	background-color: var(--botclick_active-bg-color);
 }
 
-.center .tupla p{
-	margin: 0;
-	padding: 1% 0;
-}
-
-.corso{
-	padding: 0% 1%;
-}
-
 .center .tupla{
 	padding-top: 2%;
 	margin-bottom: 1%;
@@ -560,6 +562,36 @@ textarea{
 	display: inline;
 }
 
+.center p{
+	margin: 0;
+	padding: 1% 0;
+	text-align: justify;
+}
+
+/*
+ * Sezione per le tuple contenenti i corsi, piccole variazioni
+ */
+
+.corso{
+	padding: 0% 1%;
+}
+
+.corso .tupla .right,
+.corso .tupla .right p{
+	text-align: right;
+}
+
+/* Immagine per la modifica dei corsi */
+
+.corso .modify{
+	width: 25px;
+	height: 25px;
+	padding: 2px;
+	margin: auto 0px;
+	border: 2px outset black;
+	vertical-align: bottom;
+}
+
 /*
  * Configurazione delle immagini per le valutazioni
  */
@@ -575,22 +607,9 @@ textarea{
 	margin: 0px -4px;
 }
 
-/*
- * Immagine per la modifica dei corsi
- */
-
-
-.corso .modify{
-	width: 25px;
-	height: 25px;
-	padding: 2px;
-	margin: auto 0px;
-	border: 2px outset black;
-	vertical-align: bottom;
+#select{
+	margin: 0;
+	width: 70%;
+	font-size: 12pt;
+	padding: 1%;
 }
-/*
-.corso .tupla .modify:active,
-.corso .tupla .modify:hover{
-	background-color: var(--botclick_active-bg-color);
-	border-color: var(--botclick_active-bg-color)
-}*/

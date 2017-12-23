@@ -54,6 +54,10 @@
 	padding: 1% 0;
 }
 
+.mod_corso<?php echo $row['ID_Corso'];?> div p{
+	text-align: center;
+}
+
 .mod_corso<?php echo $row['ID_Corso'];?> ul li label{
 	display: inline-block;
 	width: 40%;
@@ -139,7 +143,7 @@ $result = $connection->query($query);
 		}else{
 ?>
 			<textarea maxlength="20000" name="desc"><?php echo $dati['Descrizione']; ?></textarea>
-			<p align="center"><font color="darkred">
+			<p><font color="darkred">
 				<i><b>Non modificare le descrizione se vuoi lasciarla invariata</b></i>
 			</font></p>
 <?php
