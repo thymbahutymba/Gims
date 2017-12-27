@@ -1,3 +1,4 @@
+<?php /*
 <style>
 .mod_corso<?php echo $row['ID_Corso'];?>{
 	display: none;
@@ -78,7 +79,9 @@
 	padding: 0;
 }
 </style>
-
+*/
+?>
+<link rel="stylesheet" type="text/css" href="css/mod_corso.css" />
 <script src="js/modifica_orario.js"></script>
 <?php
 $query = "SELECT * FROM Corso WHERE ID_Corso=".$row['ID_Corso'];
@@ -86,7 +89,7 @@ $result = $connection->query($query);
 $dati = $result->fetch_assoc();
 ?>
 
-<div class="mod_corso<?php echo $row['ID_Corso'];?>">
+<div class="mod_corso mod_corso<?php echo $row['ID_Corso'];?>">
 	<form method="POST" action="php/action/mod_corso-process.php">
 		<div class="left">
 			<ul>
@@ -103,17 +106,19 @@ $dati = $result->fetch_assoc();
 				<li>
 					<label>Personal Trainer</label><!--
 					--><select name="pt" required>
+							<option value="" disabled>P.T.</option>
 <?php
-						$query = "SELECT P.ID_Persona, P.Nome, P.Cognome FROM Persona P NATURAL JOIN Dispone D
-							WHERE D.ID_Palestra=".$_GET['id']." AND D.Qualifica=".Qualifica::Personal_Trainer;
-						$result = $connection->query($query);
-						while($tmp = $result->fetch_assoc()){
-							if($tmp['ID_persona'] == $pt['ID_Persona']){
-								echo "<option value=\"".$pt['ID_Persona']."\" selected>".$pt['Cognome']." ".$pt['Nome']."</option>";
-							}else{
-								echo "<option value=\"".$tmp['ID_Persona']."\">".$tmp['Cognome']." ".$tmp['Nome']."</option>";
+							$query = "SELECT P.ID_Persona, P.Nome, P.Cognome
+ 								FROM Persona P NATURAL JOIN Dispone D
+								WHERE D.ID_Palestra=".$_GET['id']." AND D.Qualifica=".Qualifica::Personal_Trainer;
+							$result = $connection->query($query);
+							while($tmp = $result->fetch_assoc()){
+								if($tmp['ID_Persona'] == $pt['ID_Persona']){
+									echo "<option value=\"".$pt['ID_Persona']."\" selected>".$pt['Cognome']." ".$pt['Nome']."</option>";
+								}else{
+									echo "<option value=\"".$tmp['ID_Persona']."\">".$tmp['Cognome']." ".$tmp['Nome']."</option>";
+								}
 							}
-						}
 ?>
 					</select>
 				</li>
@@ -123,12 +128,12 @@ $dati = $result->fetch_assoc();
 			<ul>
 				<li>
 					<label>Numero massimo iscritti </label>
-					<input type="number" name="max" value="<?php echo $dati['LimiteMassimo']; ?>"required>
+					<input type="number" name="max" value="<?php echo $dati['LimiteMassimo']; ?>" required>
 				</li>
 				<li>
 					<label>Quota Iscrizione </label>
 					<input type="number" name="money" step="0.01" 
-						value="<?php echo $dati['QuotaIscrizione'];?>"required> €
+						value="<?php echo $dati['QuotaIscrizione'];?>" required> €
 				</li>
 			</ul>
 		</div>
@@ -143,9 +148,9 @@ $result = $connection->query($query);
 		}else{
 ?>
 			<textarea maxlength="20000" name="desc"><?php echo $dati['Descrizione']; ?></textarea>
-			<p><font color="darkred">
+			<p style="color: darkred;">
 				<i><b>Non modificare le descrizione se vuoi lasciarla invariata</b></i>
-			</font></p>
+			</p>
 <?php
 		}
 ?>
@@ -162,6 +167,7 @@ $result = $connection->query($query);
 				<tr class="giornata">
 					<td>
 						<select class="giorno" name="giorno[]" required>
+							<option value="" disabled>Giorno</option>
 							<option value="lunedi" <?php if($day['Giorno'] == "lunedi") echo "selected"; ?>>Lunedì</option>
 							<option value="martedi" <?php if($day['Giorno'] == "martedi") echo "selected"; ?>>Martedì</option>
 							<option value="mercoledi" <?php if($day['Giorno'] == "mercoledi") echo "selected"; ?>>Mercoledì</option>
@@ -170,8 +176,8 @@ $result = $connection->query($query);
 							<option value="sabato" <?php if($day['Giorno'] == "sabato") echo "selected"; ?>>Sabato</option>
 						</select>
 					</td>
-					<td><input type="time" name="oraInizio[]" value="<?php echo $day['OraInizio']; ?>"required></td>
-					<td><input type="time" name="oraFine[]" value="<?php echo $day['OraFine']; ?>"required></td>
+					<td><input type="time" name="oraInizio[]" value="<?php echo $day['OraInizio']; ?>" required></td>
+					<td><input type="time" name="oraFine[]" value="<?php echo $day['OraFine']; ?>" required></td>
 				</tr>
 <?php
 			}
