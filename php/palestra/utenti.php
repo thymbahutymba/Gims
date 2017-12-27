@@ -28,7 +28,7 @@
 				$query = "SELECT Qualifica FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
 				$qualifica = (($connection->query($query))->fetch_assoc())['Qualifica'];
 ?>
-				<table>
+				<table class="utenti">
 					<tr class="start">
 						<td>Cognome</td>
 						<td>Nome</td>

@@ -651,30 +651,30 @@ footer small a{
 	text-align: center;
 }
 
-.center table{
+.center .utenti{
 	text-align: center;
 	width: 100%;
 	margin: 0 auto;
 	border-collapse: separate;
 }
 
-.center table .start{
+.center .utenti .start{
 	font-size: 13pt;
 	font-weight: bold;
 }
 
-.center table tr td{
+.center .utenti tr td{
 	text-align: left;
 	border-bottom: 3px outset var(--light-transparent-color);
 	border-radius: 4px;
 	padding-top: 3px 0;
 }
 
-.center table tr .button{
+.center .utenti tr .button{
 	width: 0;
 }
 
-.center table tr td .botclick{
+.center .utenti tr td .botclick{
 	padding: 3px;
 	margin: 0;
 }
