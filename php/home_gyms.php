@@ -27,7 +27,7 @@
 					$row = $res->fetch_assoc();
 
 					if($row['Qualifica']<=Qualifica::Segretario){
-						echo "<li><a href=\"index.php?id=$id&2p=personale\">Personale</a></li>";
+						echo "<li><a href=\"index.php?id=$id&2p=assunzioni\">Assunzioni</a></li>";
 						echo "<li><a href=\"index.php?id=$id&2p=inserisci_corso\">Inserisci Corso</a></li>";
 					}
 					if($row['Qualifica']== Qualifica::Admin){
@@ -49,7 +49,7 @@ if(isset($_GET['2p'])){
 	$row = $res->fetch_assoc();
 ?>
 	<div class="center">
-		<div cass="top">
+		<div class="top">
 			<div class="left">
 				<h1><?php echo $row['Nome']; ?></h1>
 				<h3><?php echo $row['Citta']; ?> </h3>
@@ -162,7 +162,7 @@ if(isset($_GET['2p'])){
 <?php					}else{
 ?>							<form method="POST" action="php/action/iscrizione_palestra-process.php">
 								<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
-								<input type="submit" class="botclick" name"Iscriviti" value="Iscriviti">
+								<input type="submit" class="botclick" name="Iscriviti" value="Iscriviti">
 							</form> 
 <?php
 						}
@@ -214,15 +214,6 @@ if(isset($_GET['2p'])){
 ?>
 						</div>
 						<span>Personal Trainer: <b> <?php echo $result['Nome']." ".$result['Cognome']; ?> </b></span> 
-						<p>
-<?php 
-						if(is_null($row['Descrizione'])){
-							echo "Questo corso non è ancora provvisto di una descrizione";
-						}else{
-							echo $row['Descrizione'];
-						}
-?>
-						</p>
 					</div>
 					<div class="right">
 <?php
@@ -246,14 +237,14 @@ if(isset($_GET['2p'])){
 									<form method="POST" action="php/action/iscrizione_corso-process.php">
 										<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
 										<input type="hidden" name="corso" value="<?php echo $row['ID_Corso']; ?>">
-										<input type="submit" class="botclick" name"Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
+										<input type="submit" class="botclick" name="Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
 									</form>
 <?php
 								}
 							}
 						}
 ?>
-						<small><p>
+						<p><small>
 						Iscritti: 
 <?php
 						echo $iscritti."/".$row['LimiteMassimo'];
@@ -286,6 +277,17 @@ if(isset($_GET['2p'])){
 						}
 ?>
 						</small></p>
+					</div>
+					<div class="left desc">
+						<p>
+<?php 
+						if(is_null($row['Descrizione'])){
+							echo "Questo corso non è ancora provvisto di una descrizione";
+						}else{
+							echo $row['Descrizione'];
+						}
+?>
+						</p>
 					</div>
 				</div>
 <?php

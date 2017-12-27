@@ -5,10 +5,14 @@
 
 <?php
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-	echo "<option disabled=\"disabled\">Città</option>";
-	echo "<option selected>".$_POST['citta']."</option>";
+?>
+			<option value="" disabled>Città</option>
+			<option selected><?php echo $_POST['citta']; ?> </option>
+<?php
 }else{
-	echo "<option disabled=\"disabled\" selected>Città</option>";
+?>
+			<option value="" disabled selected>Città</option>
+<?php
 }
 require("connect.php");
 $query = "SELECT DISTINCT Citta FROM Palestra";
@@ -94,8 +98,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cercaPalestra'])){
 							echo "<h3>Chiusa</h3>";
 						}
 ?>
-						<p><?php echo date("H:i", strtotime($row['OrarioApertura']))." - "
-							.date("H:i", strtotime($row['OrarioChiusura']));?></p>
+						<span><?php echo date("H:i", strtotime($row['OrarioApertura']))." - "
+							.date("H:i", strtotime($row['OrarioChiusura']));?></span>
 					</div>
 				</div>
 			</a>

@@ -92,8 +92,8 @@ if(!isset($_GET['2p'])){
 						echo "<h3>Chiusa</h3>";
 					}
 ?>
-					<p><?php echo date("H:i", strtotime($row['OrarioApertura']))." - "
-						.date("H:i", strtotime($row['OrarioChiusura']));?></p>
+					<span><?php echo date("H:i", strtotime($row['OrarioApertura']))." - "
+						.date("H:i", strtotime($row['OrarioChiusura']));?></span>
 				</div>
 			</div>
 		</a>
@@ -115,7 +115,7 @@ if(!isset($_GET['2p'])){
 				<li><input type="email" name="email" placeholder="Inserisci l'email" required></li>
 				<li><input type="text" name="phone" placeholder="Numero di telefono" required></li>
 				<li><input type="reset" class="botclick" name="Reset" value="Reset">
-				<input class="botclick" type="submit" class="botclick" name="conferma" value="Conferma"></li>
+				<input class="botclick" type="submit" name="conferma" value="Conferma"></li>
 			</ul>
 		</form>
 	</div>

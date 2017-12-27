@@ -6,7 +6,7 @@
 		<meta name="author" content="Andrea Stevanato">
 		<meta name="description" content="Web service for gyms">
 		<link rel="icon" type="image/png" href="images/logo.png" />
-		<link rel="stylesheet" type="text/css"	href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<title>Gims is motivation sought</title>
 	</head>
 
@@ -30,14 +30,16 @@
 					?>
 						<li><a href="index.php?p=login">Login</a></li>
 						<li><a href="index.php?p=register">Register</a><li>
+<?php					} 
+?>
 				</ul>
-				<?php } ?>
 			</nav>
 		</header>
 		<div id="container">
 		<?php
-			if(isset($_GET["m"]))
+			if(isset($_GET["m"]) && $_SESSION['Letto'])
 			{
+				$_SESSION['Letto']=0;
 				echo "<script type=\"text/javascript\">window.alert('".$_GET["m"]."');</script>";
 			}
 			if(isset($_GET["id"])){

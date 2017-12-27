@@ -1,10 +1,31 @@
+/*
+ * main-bg-color: #646464
+ * main-fg-color: yellow;
+ *
+ * profile-name-color: #ff9600;
+ *
+ * hover-bg-color: #464646;
+ * hover-fg-color: white;
+ *
+ * light-transparent-color: rgba(255, 255, 230, 0.8);
+ * menu-transparent-color: rgba(150,150,130, 1);
+ * menu-fg-color: #ff9600;
+ *
+ * botclick-bg-color: #007dff;
+ * botclick-fg-color: white;
+ * botclick_active-bg-color: #0055ff;
+ *
+ * footer-bg-color: #d6d6d6;
+ * footer-fg-color: #202020;
+ */
+
 :root{
-	--main-bg-color: #646464;
+	--main_bgcolor: #646464;
 	--main-fg-color: yellow;
 
 	--profile-name-color: #ff9600;
 
-	--hover-bg-color: #464646; /* darkblue;*/
+	--hover-bg-color: #464646;
 	--hover-fg-color: white;
 
 	--light-transparent-color: rgba(255, 255, 230, 0.8);
@@ -33,7 +54,7 @@ body{
 }
 
 header{
-	background-color: var(--main-bg-color);
+	background-color: var(--main_bgcolor);
 	width: 100%;
 	height: 40px;
 	color: var(--main-fg-color);
@@ -579,6 +600,14 @@ footer small a{
 .corso .tupla .right,
 .corso .tupla .right p{
 	text-align: right;
+}
+
+.corso .tupla .desc{
+	width:75%;
+}
+
+.corso .tupla .desc p{
+	padding: 2% 0;
 }
 
 /* Immagine per la modifica dei corsi */

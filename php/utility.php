@@ -26,6 +26,7 @@
 			$tmp.="&";
 		}
 		$tmp .="m=".$msg;
+		$_SESSION['Letto']=1;
 		header($tmp);
 		$connection->close();
 		die();
@@ -85,10 +86,11 @@
 
 	function check_login(){
 		if(session_status() == PHP_SESSION_NONE){
-		 session_start();
+			session_start();
 		}
 		if(!isset($_SESSION['Login'])){
-		 header("location: http://localhost/~andrea/index.php?p=login&m=Devi prima loggare.");
+			$_SESSION['Letto']=1;
+			header("location: http://localhost/~andrea/index.php?p=login&m=Devi prima loggare.");
 		}
 	}
 
