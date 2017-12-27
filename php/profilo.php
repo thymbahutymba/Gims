@@ -6,18 +6,11 @@
 
 <div id="profilo">
 <?php
-	$res = $connection->query("SELECT ID_Persona FROM Persona WHERE Email='".$_SESSION['Email']."'");
-	if(!$res){
-		echo "Mysql error: ".$connection->error;
-		$connection->close();
-		die();
-	}
-	$row = $res->fetch_assoc();
-	if(file_exists("images/profilo/".$row['ID_Persona'])){
-		echo "<img class=\"propic\" src=\"images/profilo/".$row['ID_Persona']."\" alt=\"propic\">";
-	}else{
-		echo "<img class=\"propic\" src=\"images/profilo/none\" alt=\"propic\">";
-	}
+		if(file_exists("images/profilo/".$_SESSION['ID'])){
+			echo "<img class=\"propic\" src=\"images/profilo/".$_SESSION['ID']."\" alt=\"propic\">";
+		}else{
+			echo "<img class=\"propic\" src=\"images/profilo/none\" alt=\"propic\">";
+		}
 ?>
 
 	<div class="menu_profilo">
