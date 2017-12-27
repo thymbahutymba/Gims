@@ -5,22 +5,20 @@
 ?>
 
 <div id="profilo">
-	<?php
-		$res = $connection->query("SELECT ID_Persona FROM Persona WHERE Email='".$_SESSION['Email']."'");
-
-		if(!$res){
-			echo "Mysql error: ".$connection->error;
-			$connection->close();
-			die();
-		}
-
-		$row = $res->fetch_assoc();
-		if(file_exists("images/profilo/".$row['ID_Persona'])){
-			echo "<img class=\"propic\" src=\"images/profilo/".$row['ID_Persona']."\" alt=\"propic\">";
-		}else{
-			echo "<img class=\"propic\" src=\"images/profilo/none\" alt=\"propic\">";
-		}
-	?>
+<?php
+	$res = $connection->query("SELECT ID_Persona FROM Persona WHERE Email='".$_SESSION['Email']."'");
+	if(!$res){
+		echo "Mysql error: ".$connection->error;
+		$connection->close();
+		die();
+	}
+	$row = $res->fetch_assoc();
+	if(file_exists("images/profilo/".$row['ID_Persona'])){
+		echo "<img class=\"propic\" src=\"images/profilo/".$row['ID_Persona']."\" alt=\"propic\">";
+	}else{
+		echo "<img class=\"propic\" src=\"images/profilo/none\" alt=\"propic\">";
+	}
+?>
 
 	<div class="menu_profilo">
 		<ul>
@@ -131,6 +129,30 @@
 		</form>
 	</div>
 
+<?php
+	}else{
+?>
+		<div class="center">
+			<p>
+				In questa pagina puoi visualizzare tutte le palestre in cui sei amministratore,
+				segretario, personal trainer o atleta.
+			</p>
+		</div>
+<?php
+		$query = "SELECT * FROM Palestra P NATURAL JOIN Dispone D ";
+		$query .= "WHERE D.ID_Persona=".$_SESSION['ID'];
+		
+		$result = $connection->query($query);
+		if($connection->error)
+			die($connection->error);
+?>
+
+		<div class="palestra">
+<?php
+			while($result->num_rows && $row=$result->fetch_assoc())
+				stampa($row);
+?>
+		</div>
 <?php
 	}
 	$connection->close();

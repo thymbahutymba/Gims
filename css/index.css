@@ -642,3 +642,39 @@ footer small a{
 	font-size: 12pt;
 	padding: 1%;
 }
+
+/*
+ * Palestre -> utenti
+ */
+
+.center .qualifica{
+	text-align: center;
+}
+
+.center table{
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+.center table .start{
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+.center table tr td{
+	text-align: left;
+	border-bottom: 3px outset var(--light-transparent-color);
+	border-radius: 4px;
+	padding-top: 3px 0;
+}
+
+.center table tr .button{
+	width: 0;
+}
+
+.center table tr td .botclick{
+	padding: 3px;
+	margin: 0;
+}

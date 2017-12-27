@@ -29,12 +29,12 @@
 					if($row['Qualifica']<=Qualifica::Segretario){
 						echo "<li><a href=\"index.php?id=$id&2p=assunzioni\">Assunzioni</a></li>";
 						echo "<li><a href=\"index.php?id=$id&2p=inserisci_corso\">Inserisci Corso</a></li>";
+						echo "<li><a href=\"index.php?id=$id&2p=utenti\">Utenti</a></li>";
 					}
 					if($row['Qualifica']== Qualifica::Admin){
 						echo "<li><a href=\"index.php?id=$id&2p=modifica_home\">Modifica Home</a></li>";
 					}
 				}
-			}else{
 			}
 		?>
 		</ul>
@@ -63,9 +63,6 @@ if(isset($_GET['2p'])){
  * verra` modificata
  */
 
-//				if(session_status() == PHP_SESSION_NONE){
-//					session_start();
-//				}
 				$query="";
 				if(isset($_SESSION['Login']) && $_SESSION['Login']){
 					$query = "

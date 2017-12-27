@@ -144,4 +144,65 @@
 		$tmp = $res->fetch_assoc();
 		echo "valuta(".$valutazione.", ".$palestra.", ".$tmp['ID_Persona'].")";
 	}
+
+	/*
+ 	 * Stampa palestra
+ 	 */
+	function stampa($row){
+
+		require("connect.php");
+
+		$query = "SELECT AVG(D.Valutazione) as Valutazione FROM Dispone D 
+			WHERE D.ID_Palestra=".$row['ID_Palestra']." AND D.Valutazione is not NULL
+			GROUP BY D.ID_Palestra";
+		$tmp = $connection->query($query);
+		$valutazione = 0;
+		if($tmp){
+			$valutazione = ($tmp->fetch_assoc())['Valutazione'];
+		}
+
+		echo "<a href=\"index.php?id=".$row['ID_Palestra']."\">";
+			echo "<div class=\"tupla\">";
+				if(file_exists("images/palestra/".$row['ID_Palestra'])){
+					echo "<img class=\"display_gPropic\" src=\"./images/palestra/"
+						.$row['ID_Palestra']."\" alt=\"propic\">";
+				}else{
+					echo "<img class=\"display_gPropic\" src=\"./images/palestra/none.jpg\" alt=\"propic\">";
+				}
+				echo "<div class=\"left\">";
+					echo "<h2>".$row['Nome']."</h2>";
+					echo "<p>".$row['Citta']."</p>";
+				echo "</div>";
+				echo "<div class=\"valutazione\">";
+
+					for($i=0; $i<5;++$i){
+						if($i+1<=$valutazione){
+							echo "<img src=\"images/icon/icon_full.png\" alt=\"valutazione\""
+								."class=\"img".$i."\"> ";
+
+						}elseif($i+1-$valutazione<1 && $i+1-floor($valutazione)>=0.5){
+							echo "<img src=\"images/icon/icon_semi.png\" alt=\"valutazione\""
+								."class=\"img".$i."\"> ";
+
+						}else{
+							echo "<img src=\"images/icon/icon_clear.png\" alt=\"valutazione\"" 
+								."class=\"img".$i."\"> ";
+						}
+					}
+
+				echo "</div>";
+				echo "<div class=\"right\">";
+
+					if(check_open($row['OrarioApertura'], $row['OrarioChiusura'])){
+						echo "<h3>Aperta</h3>";
+					}else {
+						echo "<h3>Chiusa</h3>";
+					}
+
+					echo "<span>".date("H:i", strtotime($row['OrarioApertura']))." - "
+						.date("H:i", strtotime($row['OrarioChiusura']))."</span>";
+				echo "</div>";
+			echo "</div>";
+		echo "</a>";
+	}
 ?>
