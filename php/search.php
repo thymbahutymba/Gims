@@ -45,6 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['cercaPalestra'])){
 	require("php/connect.php");
 	$result = search_p($connection);
 	if(!mysqli_num_rows($result)){
+		$_SESSION['Letto']=1;
 		header("location: index.php?m=La ricerca non ha prodotto risultati.");
 	}else{
 		while($row = $result->fetch_assoc())
