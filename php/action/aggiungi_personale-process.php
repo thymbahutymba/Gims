@@ -7,7 +7,7 @@ foreach($_POST as $key => $value){
 }
 global $error;
 $page['id'] = $p_idPalestra;
-$page['2p'] = "personale";
+$page['2p'] = "assunzioni";
 
 if(isset($_POST['Conferma'])){
 	if(strlen($p_psw)<8){

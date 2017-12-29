@@ -45,8 +45,9 @@
 							if($i && $qualifica<$i){
 ?>
 								<td class="button">
-									<form method="POST" action="">
+									<form method="POST" action="php/action/rimuovi-utente.php">
 										<input type="hidden" name="idPersona" value="<?php echo $row['ID_Persona']; ?>">
+										<input type="hidden" name="idPalestra"value="<?php echo $_GET['id']; ?>">
 										<input type="submit" class="botclick" name="rimuovi" value="Rimuovi">
 									</form>
 								</td>

@@ -22,7 +22,7 @@
 
 	$res = $connection->query($query);
 	if(!$res->num_rows){
-		$page['2p']="personale";
+		$page['2p']="assunzioni";
 		send_message($page, "Non disponi di Personal Trainer non puoi avviare un corso.");
 	}
 ?>

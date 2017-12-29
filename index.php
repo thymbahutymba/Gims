@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<?php date_default_timezone_set("Europe/Rome"); ?>
+<?php
+date_default_timezone_set("Europe/Rome");
+
+$value = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+setcookie("url", $value);
+
+if(session_status() == PHP_SESSION_NONE)
+	session_start();
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -19,9 +28,6 @@
 			<nav id="navbar">
 				<ul>
 					<?php
-						if(session_status() == PHP_SESSION_NONE){
-							session_start();
-						}
 						if(isset($_SESSION['Login'])){
 							echo "<li><a href=\"index.php?p=palestra\">Palestra</a></li>";
 							echo "<li><a href=\"php/logout.php\">Logout</a></li>";
@@ -57,7 +63,7 @@
 		</div>
 		<footer>
 			<address>
-				<small>For more details contact
+				<small>Autore del progetto
 					<a href="mailto:andrea.stevanato.95@hotmail.it">Andrea Stevanato</a>
 				</small>
 			</address>

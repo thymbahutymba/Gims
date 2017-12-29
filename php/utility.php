@@ -17,7 +17,9 @@
 
 	function send_message($page, $msg)
 	{
-		$tmp = "location: http://localhost/~andrea/index.php?";
+		$pos = strpos($_COOKIE['url'], "?");
+		$url = substr($_COOKIE['url'], 0, $pos+1);
+		$tmp = "location: http://".$url;
 		foreach ($page as $key => $value) {
 			$tmp .= $key."=".$value."&";
 		}
@@ -88,9 +90,11 @@
 		if(session_status() == PHP_SESSION_NONE){
 			session_start();
 		}
+		$pos = strpos($_COOKIE['url'], "?");
+		$url = substr($_COOKIE['url'], 0, $pos+1);
 		if(!isset($_SESSION['Login'])){
 			$_SESSION['Letto']=1;
-			header("location: http://localhost/~andrea/index.php?p=login&m=Devi prima loggare.");
+			header("location: http://".$url."p=login&m=Devi prima loggare.");
 		}
 	}
 

@@ -81,7 +81,7 @@ if(isset($_GET['2p'])){
 				require("php/connect.php");
 				$val=0;
 				$res = $connection->query($query);
-				if($res)
+				if($res && ($res->fetch_assoc())['Valutazione']!=NULL)
 					$val = ($res->fetch_assoc())['Valutazione'];
 
 				if(isset($_SESSION['Login']) && $_SESSION['Login']){
