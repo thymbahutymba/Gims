@@ -7,6 +7,15 @@
 	check_login();
 	$page['id']=$_GET['id'];
 
+	//TODO CHECK DISPONE
+	$query = "SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
+	$result = $connection->query($query);
+	if(!$result || !$result->num_rows)
+		send_message($page, "Non sei iscritto in questa palestra");
+
+	if(get_qualifica($connection, $_GET['id'])>Qualifica::Segretario)
+		send_message($page, "Non hai i permessi per la gestione degli utenti");
+
 	for($i = 0; $i < 4; ++$i){
 		$query = "SELECT * FROM Persona P NATURAL JOIN Dispone D ";
 		$query .= "WHERE D.ID_Palestra=".$id." AND D.Qualifica=".$i;

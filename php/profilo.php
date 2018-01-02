@@ -2,6 +2,7 @@
 	require_once("php/connect.php");
 	require_once("php/utility.php");
 	check_login();
+	$page['p']="profilo";
 ?>
 
 <div id="profilo">
@@ -123,7 +124,9 @@
 	</div>
 
 <?php
-	}else{
+	}elseif(isset($_GET['2p']) && !file_exists("php/palestra/".$_GET['2p']))
+		send_message($page, "La pagina richiesta non esiste");
+	else{
 ?>
 		<div class="center">
 			<p>

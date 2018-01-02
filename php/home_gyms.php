@@ -42,6 +42,8 @@
 </div>
 <?php
 if(isset($_GET['2p'])){
+	if(!file_exists("php/palestra/".$_GET['2p']))
+		send_message($page, "La pagina richiesta non esiste");
 	include_once("php/palestra/".$_GET['2p'].".php");
 }else{
 	$query = "SELECT * FROM Palestra WHERE ID_Palestra=".$id;
@@ -62,29 +64,33 @@ if(isset($_GET['2p'])){
  * Campo per inserire la propria valutazione, nel caso sia stata gia` inserita
  * verra` modificata
  */
+				require("php/connect.php");
 
-				$query="";
+				$query = "
+					SELECT AVG(Valutazione) as Valutazione
+					FROM Dispone
+					WHERE Valutazione is not NULL AND ID_Palestra=".$row['ID_Palestra']."
+					GROUP BY ID_Palestra";
+
 				if(isset($_SESSION['Login']) && $_SESSION['Login']){
-					$query = "
+					$query_tmp="SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
+					$tmp = ($connection->query($query_tmp));
+
+					if(isset($tmp) && $tmp)
+						$query = "
 						SELECT D.Valutazione as Valutazione
 						FROM Dispone D
 						WHERE D.ID_Palestra=".$row['ID_Palestra']." AND
-						D.ID_Persona= (
-						SELECT P.ID_Persona FROM Persona P WHERE P.Email='".$_SESSION['Email']."')";
-				}else{
-					$query = "
-						SELECT AVG(Valutazione) as Valutazione
-						FROM Dispone
-						WHERE Valutazione is not NULL AND ID_Palestra=".$row['ID_Palestra']."
-						GROUP BY ID_Palestra";
+						D.ID_Persona=".$_SESSION['ID'];
 				}
-				require("php/connect.php");
+
 				$val=0;
 				$res = $connection->query($query);
-				if($res && ($res->fetch_assoc())['Valutazione']!=NULL)
-					$val = ($res->fetch_assoc())['Valutazione'];
+				if($res)
+ 				    $val = ($res->fetch_assoc())['Valutazione'];
+				$val = ($val==NULL)?0:$val;
 
-				if(isset($_SESSION['Login']) && $_SESSION['Login']){
+				if(isset($tmp) && $tmp && $tmp->num_rows && isset($_SESSION['Login']) && $_SESSION['Login']){
 ?>
 					<div class="valutazione" onmouseout="restore(<?php echo $val; ?>)">
 <?php
@@ -190,7 +196,7 @@ if(isset($_GET['2p'])){
 		<div class="center corso">
 <?php
 			while($row = $res->fetch_assoc()){
-				include("php/palestra/modifica_corso.php");
+				include("php/modifica_corso.php");
 ?>
 				<div class="tupla <?php echo $row['ID_Corso']; ?>">
 <?php
