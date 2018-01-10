@@ -4,6 +4,6 @@
 session_start();
 session_unset();
 //send_message($page, "Logout effettuato.");
-$_SESSION['Letto']=1;
+$_SESSION['Letto']=0;
 header("location: ../index.php?p=login&m=Logout effettuato.");
 ?>

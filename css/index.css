@@ -470,10 +470,15 @@ footer small a{
 /*
  * Modifica profilo
  */
+
 .mini_form.prof{
-	padding: 2% 1%;
+	padding: 1% 0%;
 }
 
+
+.mini_form h2{
+	padding-top: 2%;
+}
 .mini_form.prof label{
 	width: 25%;
 }
@@ -522,7 +527,7 @@ footer small a{
 }
 
 .center .right{
-	width: 22%;
+	/*width: 22%;*/
 }
 
 .center .slogan{

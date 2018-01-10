@@ -43,9 +43,9 @@ if(session_status() == PHP_SESSION_NONE)
 		</header>
 		<div id="container">
 		<?php
-			if(isset($_GET["m"]) && $_SESSION['Letto'])
+			if(isset($_GET["m"]) && !$_SESSION['Letto'])
 			{
-				$_SESSION['Letto']=0;
+				$_SESSION['Letto']=1;
 				echo "<script type=\"text/javascript\">window.alert('".$_GET["m"]."');</script>";
 			}
 			if(isset($_GET["id"])){
@@ -67,7 +67,8 @@ if(session_status() == PHP_SESSION_NONE)
 					<a href="mailto:andrea.stevanato.95@hotmail.it">Andrea Stevanato</a>
 				</small>
 			</address>
-			<small>Progetto PWEB</small>
+			<small>
+				<a href="progetto.html">Progetto PWEB</a></small>
 		</footer>
 	</body>
 </html>

@@ -51,7 +51,24 @@ $valori = $result->fetch_assoc();
 			<li><input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>"></li>
 			<li>
 				<input type="reset" class="botclick" name="Reset" value="Reset">
-				<input type="submit" class="botclick" name="Inserisci" value="Conferma">
+				<input type="submit" class="botclick" name="Descrizione" value="Conferma">
+			</li>
+		</ul>
+	</form>
+</div>
+
+<div class="mini_form mod_home prof">
+	<form action="php/action/modifica_home-process.php" method="post" enctype="multipart/form-data">
+		<h2>Modifica Immagine della palestra</h2>
+		<ul>
+			<li><p>
+				Scegli l'immagine che vuoi caricare, dimensione massima 2MiB.
+			</p></li>
+			<li>
+				<input type="hidden" name="idPalestra" value="<?php echo $_GET['id'];?>">
+			<li>
+				<input type="file" name="propic" accept="image/*">
+				<input class="botclick" type="submit" name="modPropic" value="Conferma">
 			</li>
 		</ul>
 	</form>

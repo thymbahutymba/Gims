@@ -42,7 +42,7 @@
 </div>
 <?php
 if(isset($_GET['2p'])){
-	if(!file_exists("php/palestra/".$_GET['2p']))
+	if(!file_exists("php/palestra/".$_GET['2p'].".php"))
 		send_message($page, "La pagina richiesta non esiste");
 	include_once("php/palestra/".$_GET['2p'].".php");
 }else{
@@ -118,6 +118,10 @@ if(isset($_GET['2p'])){
 <?php
 							}
 						}
+?>
+
+					</div>
+<?php
 				}else{
 ?>
 					<div class="valutazione">
@@ -141,10 +145,10 @@ if(isset($_GET['2p'])){
 <?php
 								}
 							}
-						}
 ?>
 					</div>
 <?php
+				}
 					if(check_open($row['OrarioApertura'], $row['OrarioChiusura'])){
 						echo "<h3>Aperta</h3>";
 					}else {
@@ -175,13 +179,18 @@ if(isset($_GET['2p'])){
 		</div> <!-- fine div top -->
 		<div class="slogan">
 <?php
-				if($row['Slogan'] !== NULL && $row['Descrizione']!==NULL){
+				if($row['Slogan'] !== NULL){
+?>					<h3><?php echo $row['Slogan']; ?></h3>
+<?php
+				}else{
+?>					<span>Questa palestra non è provvista di uno slogan.</span>
+<?php
+				}
+				if($row['Descrizione']!==NULL){
 ?>
-					<h3><?php echo $row['Slogan']; ?></h3>
 					<p><?php echo $row['Descrizione']; ?></p>
 <?php			}else{
-?>					<p>Questa palestra non è ancora provvista di uno slogan e di una
-						descrizione.</p>
+?>					<p>Questa palestra non è provvista di una descrizione.</p>
 <?php
 				}
 ?>

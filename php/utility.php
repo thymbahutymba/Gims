@@ -28,10 +28,8 @@
 			$tmp.="&";
 		}
 		$tmp .="m=".$msg;
-		$_SESSION['Letto']=1;
+		$_SESSION['Letto']=0;
 		header($tmp);
-		$connection->close();
-		die();
 	}
 
 	/*
