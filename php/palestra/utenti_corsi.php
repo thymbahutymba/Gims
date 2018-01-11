@@ -66,7 +66,8 @@ if($utenti && !$utenti->num_rows){
 					if($qualifica<=Qualifica::Segretario){
 ?>
 						<td class="button">
-							<form method="POST" action="php/action/rimuovi-utente.php">
+							<form method="POST" action="php/action/rimuovi_utente_c-process.php">
+								<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 								<input type="hidden" name="idPersona" value="<?php echo $row['ID_Persona']; ?>">
 								<input type="hidden" name="idPalestra"value="<?php echo $_GET['id']; ?>">
 								<input type="submit" class="botclick" name="rimuovi" value="Rimuovi">
