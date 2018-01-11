@@ -43,7 +43,7 @@ if(session_status() == PHP_SESSION_NONE)
 		</header>
 		<div id="container">
 		<?php
-			if(isset($_GET["m"]) && !$_SESSION['Letto'])
+			if(isset($_GET['m']) /*&& !$_SESSION['Letto']*/)
 			{
 				$_SESSION['Letto']=1;
 				echo "<script type=\"text/javascript\">window.alert('".$_GET["m"]."');</script>";
@@ -68,7 +68,7 @@ if(session_status() == PHP_SESSION_NONE)
 				</small>
 			</address>
 			<small>
-				<a href="progetto.html">Progetto PWEB</a></small>
+				<a href="progetto.html" target="_blank">Progetto PWEB</a></small>
 		</footer>
 	</body>
 </html>

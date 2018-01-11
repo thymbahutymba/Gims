@@ -39,14 +39,6 @@ CREATE TABLE IF NOT EXISTS Corso(
   FOREIGN KEY (ID_PersonalTrainer) REFERENCES Persona(ID_Persona)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS Riferimento(
-  ID integer PRIMARY KEY AUTO_INCREMENT,
-  ID_Palestra integer NOT NULL,
-  ID_Corso integer NOT NULL,
-  FOREIGN KEY (ID_Palestra) REFERENCES Palestra(ID_Palestra),
-  FOREIGN KEY (ID_Corso) REFERENCES Corso(ID_Corso)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS Partecipazione(
   ID integer PRIMARY KEY AUTO_INCREMENT,
   ID_Persona integer NOT NULL,
