@@ -31,6 +31,9 @@
 						echo "<li><a href=\"index.php?id=$id&2p=inserisci_corso\">Inserisci Corso</a></li>";
 						echo "<li><a href=\"index.php?id=$id&2p=utenti\">Utenti</a></li>";
 					}
+					if($row['Qualifica']<=Qualifica::Personal_Trainer){
+						echo "<li><a href=\"index.php?id=$id&2p=utenti_corsi\">Utenti Corsi</a></li>";
+					}
 					if($row['Qualifica']== Qualifica::Admin){
 						echo "<li><a href=\"index.php?id=$id&2p=modifica_home\">Modifica Home</a></li>";
 					}
@@ -73,10 +76,10 @@ if(isset($_GET['2p'])){
 					GROUP BY ID_Palestra";
 
 				if(isset($_SESSION['Login']) && $_SESSION['Login']){
-					$query_tmp="SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
+					$query_tmp="SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID']." AND ID_Palestra=".$row['ID_Palestra'];
 					$tmp = ($connection->query($query_tmp));
-
-					if(isset($tmp) && $tmp)
+					
+					if(isset($tmp) && $tmp && $tmp->num_rows)
 						$query = "
 						SELECT D.Valutazione as Valutazione
 						FROM Dispone D
@@ -241,10 +244,14 @@ if(isset($_GET['2p'])){
 								$query = "SELECT * FROM Partecipazione WHERE ID_Corso=".$row['ID_Corso']
 								." AND ID_Persona=".$_SESSION['ID'];
 								$tmp = $connection->query($query);
+
+								// Controllo se sono iscritto alla palestra
+								$query = "SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
+								$iscritto = $connection->query($query);
 								/*
  								 * Controllo se utente già iscritto al corso
  								 */
-								if($tmp && !$tmp->num_rows){
+								if($iscritto->num_rows && $tmp && !$tmp->num_rows){
 ?>
 									<form method="POST" action="php/action/iscrizione_corso-process.php">
 										<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">

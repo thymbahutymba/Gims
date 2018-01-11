@@ -17,7 +17,7 @@
 	}elseif($p_money<0){
 		send_message($page, "Il corso deve avere un costo maggiore o uguale di 0.");
 	}elseif(isset($p_desc) && preg_match('/[\'^£$%&*()}{@#~<>|=_+¬-]/',$p_desc)){
-		send_message($page, "La descrizione contiene caratteri non ammessi.");
+		send_message($page, "La descrizione contiene caratteri non ammessi");
 	}
 
 	for($i=0; $i<count($p_giorno); ++$i){

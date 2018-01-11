@@ -7,7 +7,6 @@
 	check_login();
 	$page['id']=$_GET['id'];
 
-	//TODO CHECK DISPONE
 	$query = "SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
 	$result = $connection->query($query);
 	if(!$result || !$result->num_rows)
@@ -54,7 +53,7 @@
 							if($i && $qualifica<$i){
 ?>
 								<td class="button">
-									<form method="POST" action="php/action/rimuovi-utente.php">
+									<form method="POST" action="php/action/rimuovi-utente-process.php">
 										<input type="hidden" name="idPersona" value="<?php echo $row['ID_Persona']; ?>">
 										<input type="hidden" name="idPalestra"value="<?php echo $_GET['id']; ?>">
 										<input type="submit" class="botclick" name="rimuovi" value="Rimuovi">

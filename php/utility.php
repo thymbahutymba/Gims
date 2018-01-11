@@ -30,6 +30,8 @@
 		$tmp .="m=".$msg;
 		$_SESSION['Letto']=0;
 		header($tmp);
+		$connection->close();
+		die();
 	}
 
 	/*

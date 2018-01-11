@@ -33,7 +33,6 @@ if(isset($_POST['Descrizione'])){
 	$connection->query($query) || die($connection->error);
 	unset($page['2p']);
 	send_message($page, "Home modificata con successo.");
-
 }else if(isset($_POST['modPropic'])){
 	$tmp = explode(".", $_FILES['propic']['name']);
 	$type = explode("/",$_FILES['propic']['type']);

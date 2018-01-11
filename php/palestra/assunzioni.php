@@ -43,21 +43,21 @@
 						$result = $connection->query($query);
 						while($row = $result->fetch_assoc()){
 ?>
-						<input class="<?php echo $row['Email']; ?>" type="hidden" name="nome" value="<?php echo $row['Nome']; ?>">
-						<input class="<?php echo $row['Email']; ?>" type="hidden" name="cognome" value="<?php echo $row['Cognome']; ?>">
-						<input class="<?php echo $row['Email']; ?>" type="hidden" name="data" value="<?php echo $row['DataNascita']; ?>">
-						<input class="<?php echo $row['Email']; ?>" type="hidden" name="sesso" value="<?php echo $row['Sesso']; ?>">
+						<input class="<?php echo $row['Email']; ?>" type="hidden" name="nome" value="<?php echo $row['Nome']; ?>" disabled>
+						<input class="<?php echo $row['Email']; ?>" type="hidden" name="cognome" value="<?php echo $row['Cognome']; ?>" disabled>
+						<input class="<?php echo $row['Email']; ?>" type="hidden" name="data" value="<?php echo $row['DataNascita']; ?>" disabled>
+						<input class="<?php echo $row['Email']; ?>" type="hidden" name="sesso" value="<?php echo $row['Sesso']; ?>" disabled>
 <?php
 						}
 ?>
 					</select>
 				</li>
-				<li><input type="text" name="nome" placeholder="Inserisci il nome" required disabled></li>
-				<li><input type="text" name="cognome" placeholder="Inserisci il cognome" required disabled></li>
+				<li><input type="text" name="nome" placeholder="Inserisci il nome" required readonly></li>
+				<li><input type="text" name="cognome" placeholder="Inserisci il cognome" required readonly></li>
 				<li><input type="date" name="data" required disabled></li>
 				<li>
-					Maschio<input class="botclick" type="radio" name="sesso" value="Maschio" required disabled>
-					Femmina<input class="botclick" type="radio" name="sesso" value="Femmina" required disabled>
+					Maschio<input class="botclick" type="radio" name="sesso" value="Maschio" required readonly>
+					Femmina<input class="botclick" type="radio" name="sesso" value="Femmina" required readonly>
 				</li>
 				<li>
 					<select name="qualifica" required>
