@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/mod_corso.css" />
 <script src="js/modifica_orario.js"></script>
+
 <?php
 $query = "SELECT * FROM Corso WHERE ID_Corso=".$row['ID_Corso'];
 $result = $connection->query($query);

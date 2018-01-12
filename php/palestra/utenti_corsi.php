@@ -13,21 +13,32 @@ if(!$result || !$result->num_rows)
 if(get_qualifica($connection, $_GET['id'])>Qualifica::Personal_Trainer)
 	send_message($page, "Non hai i permessi per la gestione degli utenti");
 $query = "SELECT ID_Corso, Nome FROM Corso WHERE ID_Palestra=".$_GET['id'];
+
+// I PT possono visualizzare gli utenti dei propri corsi
+if(get_qualifica($connection, $_GET['id'])==Qualifica::Personal_Trainer)
+	$query .= " AND ID_PersonalTrainer=".$_SESSION['ID'];
+
 $result = $connection->query($query);
 ?>
 
 <div class="center">
-	<form method="POST" action="">
+	<form method="POST" action="#">
 		<select name="corso" class="select_corso" onchange="this.form.submit()">
 <?php
-			while($row=$result->fetch_assoc()){
+			if($result && !$result->num_rows){
 ?>
-				<option value="<?php echo $row['ID_Corso'];?>"
-<?php 				if(isset($_POST) && isset($_POST['corso']) && $_POST['corso']==$row['ID_Corso'])
-						echo "selected";
-?>
-				><?php echo $row['Nome']?></option>
+				<option selected disabled>Corso</option>
 <?php
+			}else{
+				while($row=$result->fetch_assoc()){
+?>
+					<option value="<?php echo $row['ID_Corso'];?>"
+<?php 					if(isset($_POST) && isset($_POST['corso']) && $_POST['corso']==$row['ID_Corso'])
+							echo "selected";
+?>
+					><?php echo $row['Nome']?></option>
+<?php
+				}
 			}
 ?>
 		</select>
@@ -35,12 +46,18 @@ $result = $connection->query($query);
 <?php
 $qualifica = get_qualifica($connection, $_GET['id']);
 $query="SELECT * FROM Persona Per NATURAL JOIN Partecipazione Par WHERE ";
+
 if(isset($_POST) && isset($_POST['corso'])){
-	$query .= "Par.ID_Corso=".$_POST['corso'];
+	$query .= " Par.ID_Corso=".$_POST['corso'];
 }else{
-	$query .= "Par.ID_Corso = (SELECT C.ID_Corso FROM Corso C WHERE C.ID_Palestra=".$_GET['id'].
-		" LIMIT 1)";
+	$query .= " Par.ID_Corso = (SELECT C.ID_Corso FROM Corso C WHERE C.ID_Palestra=".$_GET['id'];
+	
+	if(get_qualifica($connection, $_GET['id'])==Qualifica::Personal_Trainer)
+		$query .= " AND C.ID_PersonalTrainer=".$_SESSION['ID'];
+
+	$query .= " LIMIT 1)";
 }
+
 $utenti = $connection->query($query);
 if($utenti && !$utenti->num_rows){
 ?>
@@ -54,6 +71,7 @@ if($utenti && !$utenti->num_rows){
 			<td>Cognome</td>
 			<td>Nome</td>
 			<td>Email</td>
+			<td id="emp"></td>
 		</tr>
 <?php
 			while($row = $utenti->fetch_assoc()){
@@ -69,7 +87,7 @@ if($utenti && !$utenti->num_rows){
 							<form method="POST" action="php/action/rimuovi_utente_c-process.php">
 								<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 								<input type="hidden" name="idPersona" value="<?php echo $row['ID_Persona']; ?>">
-								<input type="hidden" name="idPalestra"value="<?php echo $_GET['id']; ?>">
+								<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
 								<input type="submit" class="botclick" name="rimuovi" value="Rimuovi">
 							</form>
 						</td>

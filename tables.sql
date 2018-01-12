@@ -65,14 +65,3 @@ CREATE TABLE IF NOT EXISTS Dispone(
   FOREIGN KEY (ID_Palestra) REFERENCES Palestra(ID_Palestra) ON DELETE CASCADE,
   FOREIGN KEY (ID_Persona) REFERENCES Persona(ID_Persona) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE IF NOT EXISTS Messaggio(
-  ID integer PRIMARY KEY AUTO_INCREMENT,
-  ID_Persona integer NOT NULL,
-  ID_Palestra integer NOT NULL,
-  Testo text NOT NULL,
-  Letto boolean NOT NULL DEFAULT false,
-  Mittente integer NOT NULL CHECK(Mittente in(0,1)), -- 0 per palestra, 1 per persona
-  FOREIGN KEY (ID_Palestra) REFERENCES Palestra(ID_Palestra),
-  FOREIGN KEY (ID_Persona) REFERENCES Persona(ID_Persona) ON DELETE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -28,6 +28,11 @@
 		}
 	}
 
+	$query = "SELECT * FROM Partecipazione P WHERE P.ID_Corso=".$p_idCorso;
+	$result = $connection->query($query);
+	if($result && $result->num_rows && $result->num_rows>$p_max)
+		send_message($page, "Il corso ha già ".$result->num_rows." partecipanti, non puoi scendere sotto questa soglia");
+
 	$query = "UPDATE Corso C SET C.Nome='".$p_nome."', C.LimiteMassimo=".$p_max;
 	$query .= ", C.QuotaIscrizione=".$p_money;
 	$query .= ", C.ID_PersonalTrainer=".$p_pt;

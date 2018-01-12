@@ -96,6 +96,7 @@
 					<label>Password: </label>
 					<input type="password" name="curPsw" placeholder="Password corrente">
 				</li>
+				<li><span><i>La password deve contenere dagli 8 ai 20 caratteri</i></span></li>
 				<li>
 					<label>Nuova: </label>
 					<input type="password" name="newPsw" placeholder="Nuova password">

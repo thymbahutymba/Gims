@@ -19,26 +19,6 @@
  * footer-fg-color: #202020;
  */
 
-:root{
-	--main_bgcolor: #646464;
-	--main-fg-color: yellow;
-
-	--profile-name-color: #ff9600;
-
-	--hover-bg-color: #464646;
-	--hover-fg-color: white;
-
-	--light-transparent-color: rgba(255, 255, 230, 0.8);
-	--menu-transparent-color: rgba(150,150,130, 1);
-	--menu-fg-color: #ff9600;
-
-	--botclick-bg-color: #007dff;
-	--botclick-fg-color: white;
-	--botclick_active-bg-color: #0055ff;
-
-	--footer-bg-color: #d6d6d6;
-	--footer-fg-color: #202020;
-}
 html{
 	height: 100%;
 }
@@ -47,17 +27,17 @@ body{
 	margin: 0;
 	padding: 0;
 	display: inline;
-	background: #0078ff url("../images/wallpaper_3.jpg");
+	background: #0078ff url("../images/wallpaper.jpg");
 	background-attachment: fixed;
 	background-size: 100%;
 	font-family: sans-serif;
 }
 
 header{
-	background-color: var(--main_bgcolor);
+	background-color: #646464;
 	width: 100%;
 	height: 40px;
-	color: var(--main-fg-color);
+	color: yellow;
 	margin: 0;
 	font-family: sans-serif;
 	padding: 4px 0;
@@ -118,7 +98,7 @@ textarea{
 	text-decoration: none;
 	padding: 8px;
 	display: inline;
-	color: var(--main-fg-color);
+	color: yellow;
 	font-weight: bold;
 }
 
@@ -128,14 +108,14 @@ textarea{
 }
 
 #navbar li a.nome{
-	color: var(--profile-name-color);
+	color: #ff9600;
 	text-transform: uppercase;
 	text-decoration: none;
 }
 
 #navbar a:hover, #navbar li:active a, #navbar li a.nome:hover{
-	color: var(--hover-fg-color);
-	background-color: var(--hover-bg-color);
+	color: white;
+	background-color: #464646;
 }
 
 #container{
@@ -145,10 +125,10 @@ textarea{
 }
 
 footer {
-	color: var(--footer-fg-color);
+	color: #202020;
 	width: 100%;
 	height: 20px;
-	background-color: var(--footer-bg-color);
+	background-color: #d6d6d6;
 	box-shadow: 0px 0px 10px;
 }
 
@@ -188,8 +168,8 @@ footer small a{
 #form {
 	width: 30%;
 	text-align: center;
-	background-color: var(--light-transparent-color);
-	border: 4px inset var(--light-transparent-color);
+	background-color: rgba(255, 255, 230, 0.8);
+	border: 4px inset rgba(255, 255, 230, 0.8);
 	margin: 5% auto;
 }
 
@@ -220,8 +200,8 @@ footer small a{
 #form input.botclick{
 	width: auto;
 	font-family: sans-serif;
-	background-color: var(--botclick-bg-color);
-	color: var(--botclick-fg-color);
+	background-color: #007dff;
+	color: white;
 	font-weight: bold;
 	border: 1px solid #007dff;
 	border-radius: 5px;
@@ -229,7 +209,7 @@ footer small a{
 }
 
 #form input.botclick:active{
-	background-color: var(--botclick_active-fg-color);
+	background-color: #0055ff;
 }
 
 #form li select{
@@ -255,21 +235,21 @@ footer small a{
 
 .menu_profilo ul li a{
 	display: block;
-	background-color: var(--menu-transparent-color);
+	background-color: rgba(150, 150, 130, 1);
 	font-size: 20px;
 	font-weight: bold;
 	font-style: oblique;
 	text-decoration: none;
-	color: var(--menu-fg-color);
+	color: #ff9600;
 	margin: 0px;
 	padding: 6px;
-	border: 3px solid var(--light-transparent-color);
+	border: 3px solid rgba(255, 255, 230, 0.8);
 	box-shadow: 0px 0px 4px;
 }
 
 .menu_profilo li a:hover{
-	background-color: var(--hover-bg-color);
-	color: var(--hover-fg-color);
+	background-color: #464646;
+	color: white;
 }
 
 /*
@@ -314,7 +294,7 @@ footer small a{
 .palestra{
 	margin: 2% auto;
 	width: 60%;
-	background-color: var(--light-transparent-color);
+	background-color: rgba(255, 255, 230, 0.8);
 }
 
 .palestra .tupla {
@@ -368,7 +348,7 @@ footer small a{
 .propic, .propic_palestra{
 	width: 120px;
 	height: 120px;
-	border: 5px solid var(--light-transparent-color);
+	border: 5px solid rgba(255, 255, 230, 0.8);
 	background-color: white;
 	box-shadow: 0px 0px 10px;
 	float: left;
@@ -382,8 +362,8 @@ footer small a{
 
 .mini_form {
 	width: 40%;
-	background-color: var(--light-transparent-color);
-	border: 4px inset var(--light-transparent-color);
+	background-color: rgba(255, 255, 230, 0.8);
+	border: 4px inset rgba(255, 255, 230, 0.8);
 	margin: 5% auto;
 	overflow: hidden;
 }
@@ -423,20 +403,26 @@ footer small a{
 	margin: 0 auto;
 	text-align: center;
 }
-
+/*
 .mini_form .left,
 .mini_form .right{
 	display: block;
 	text-align: left;
-	width: 30%;
+	padding: 1%;
+}
+*/
+
+.mini_form div input.botclick,
+.mini_form div input.botclick{
+	font-size: 15px;
 	padding: 2%;
 }
 
 .mini_form input.botclick{
 	width: auto;
 	font-family: sans-serif;
-	background-color: var(--botclick-bg-color);
-	color: var(--botclick-fg-color);
+	background-color: #007dff;
+	color: white;
 	font-weight: bold;
 	border: 1px solid #007dff;
 	border-radius: 5px;
@@ -445,7 +431,7 @@ footer small a{
 }
 
 .mini_form input.botclick:active{
-	background-color: var(--botclick_active-bg-color);
+	background-color: #0055ff;
 }
 
 .mini_form table{
@@ -509,9 +495,9 @@ footer small a{
 .center{
 	width: 60%;
 	margin: 2% auto;
-	background-color: var(--light-transparent-color);
+	background-color: rgba(255, 255, 230, 0.8);
 	box-shadow: 0px 0px 10px;
-	border: 4px groove var(--light-transparent-color);
+	border: 4px groove rgba(255, 255, 230, 0.8);
 	overflow: auto;
 	padding: 1%;
 }
@@ -558,8 +544,8 @@ footer small a{
 	font-size: 15px;
 	width: auto;
 	font-family: sans-serif;
-	background-color: var(--botclick-bg-color);
-	color: var(--botclick-fg-color);
+	background-color: #007dff;
+	color: white;
 	font-weight: bold;
 	border: 1px solid #007dff;
 	border-radius: 5px;
@@ -568,7 +554,7 @@ footer small a{
 }
 
 .center input.botclick:active{
-	background-color: var(--botclick_active-bg-color);
+	background-color: #0055ff;
 }
 
 .center .tupla{
@@ -576,7 +562,7 @@ footer small a{
 	margin-bottom: 1%;
 	overflow: hidden;
 	display: block;
-	border-bottom: 3px outset var(--light-transparent-color);
+	border-bottom: 3px outset rgba(255, 255, 230, 0.8);
 	border-radius: 4px;
 }
 
@@ -670,18 +656,19 @@ footer small a{
 
 .center .utenti tr td{
 	text-align: left;
-	border-bottom: 3px outset var(--light-transparent-color);
+	border-bottom: 3px outset rgba(255, 255, 230, 0.8);
 	border-radius: 4px;
-	padding-top: 3px 0;
+	margin-top: 3px;
 }
 
 .center .utenti tr .button{
 	width: 0;
+	border-bottom: 0;
 }
 
 .center .utenti tr td .botclick{
 	padding: 3px;
-	margin: 0;
+	margin: 0 0 2px;
 }
 
 .center .select_corso{
@@ -689,4 +676,8 @@ footer small a{
 	width: 30%;
 	font-size: 12pt;
 	padding: 5px;
+}
+
+#emp{
+	border-bottom: 0;
 }

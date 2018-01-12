@@ -41,6 +41,7 @@
 						<td>Cognome</td>
 						<td>Nome</td>
 						<td>Email</td>
+						<td style="border: unset;"></td>
 					</tr>
 <?php
 					while($row = $res->fetch_assoc()){
@@ -49,19 +50,21 @@
 							<td><?php echo $row['Cognome']; ?></td>
 							<td><?php echo $row['Nome']; ?></td>
 							<td><?php echo $row['Email']; ?></td>
+							<td class="button">
 <?php
 							if($i && $qualifica<$i){
 ?>
-								<td class="button">
+							
 									<form method="POST" action="php/action/rimuovi_utente-process.php">
 										<input type="hidden" name="idPersona" value="<?php echo $row['ID_Persona']; ?>">
-										<input type="hidden" name="idPalestra"value="<?php echo $_GET['id']; ?>">
+										<input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>">
 										<input type="submit" class="botclick" name="rimuovi" value="Rimuovi">
 									</form>
-								</td>
 <?php
 							}
 ?>
+							</td>
+
 						</tr>
 <?php
 					}

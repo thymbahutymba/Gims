@@ -182,15 +182,15 @@
 					for($i=0; $i<5;++$i){
 						if($i+1<=$valutazione){
 							echo "<img src=\"images/icon/icon_full.png\" alt=\"valutazione\""
-								."class=\"img".$i."\"> ";
+								." class=\"img".$i."\"> ";
 
 						}elseif($i+1-$valutazione<1 && $i+1-floor($valutazione)>=0.5){
 							echo "<img src=\"images/icon/icon_semi.png\" alt=\"valutazione\""
-								."class=\"img".$i."\"> ";
+								." class=\"img".$i."\"> ";
 
 						}else{
 							echo "<img src=\"images/icon/icon_clear.png\" alt=\"valutazione\"" 
-								."class=\"img".$i."\"> ";
+								." class=\"img".$i."\"> ";
 						}
 					}
 

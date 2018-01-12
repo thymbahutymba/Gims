@@ -168,7 +168,10 @@ if(isset($_GET['2p'])){
 						$tmp = $res->fetch_assoc()['num'];
 						if($tmp){ 
 ?>
-							<p>Sei già iscritto</p>
+							<form method="POST" action="php/action/canc_iscrizione-process.php">
+								<input type="hidden" name="idPalestra" value="<?php echo $row['ID_Palestra']; ?>">
+								<input type="submit" class="botclick" name="rimuovi" value="Cancella Iscrizione">
+							</form>
 <?php					}else{
 ?>							<form method="POST" action="php/action/iscrizione_palestra-process.php">
 								<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
@@ -220,12 +223,16 @@ if(isset($_GET['2p'])){
 						<div>
 							<h2><?php echo $row['Nome']; ?></h2>
 <?php
-							if(isset($_SESSION['Login']) && get_qualifica($connection, $_GET['id'])<=Qualifica::Segretario){
+					if(isset($_SESSION['Login'])){
+						$query = "SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
+						$tmp = $connection->query($query);
+						if($tmp && $tmp->num_rows && get_qualifica($connection, $_GET['id'])<=Qualifica::Segretario){
 ?>
-								<input type="image" src="images/modify.png" alt="modify" class="modify"
+							<input type="image" src="images/modify.png" alt="modify" class="modify"
 							onclick="modifica_corso(<?php echo $row['ID_Corso']; ?>)">
 <?php
-							}
+						}
+					}
 ?>
 						</div>
 						<span>Personal Trainer: <b> <?php echo $result['Nome']." ".$result['Cognome']; ?> </b></span> 
@@ -248,15 +255,28 @@ if(isset($_GET['2p'])){
 								// Controllo se sono iscritto alla palestra
 								$query = "SELECT * FROM Dispone WHERE ID_Persona=".$_SESSION['ID'];
 								$iscritto = $connection->query($query);
+
+								$query = "SELECT * FROM Corso WHERE ID_Corso=".$row['ID_Corso']." AND ID_PersonalTrainer=".$_SESSION['ID'];
+								$pt = $connection->query($query);
+
 								/*
  								 * Controllo se utente già iscritto al corso
  								 */
-								if($iscritto->num_rows && $tmp && !$tmp->num_rows){
+								if($iscritto->num_rows && $tmp && !$tmp->num_rows && $pt && !$pt->num_rows){
 ?>
 									<form method="POST" action="php/action/iscrizione_corso-process.php">
-										<input type="hidden" name="palestra" value="<?php echo $row['ID_Palestra']; ?>">
-										<input type="hidden" name="corso" value="<?php echo $row['ID_Corso']; ?>">
+										<input type="hidden" name="idPalestra" value="<?php echo $row['ID_Palestra']; ?>">
+
+										<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
 										<input type="submit" class="botclick" name="Iscriviti" value="Iscriviti" style="padding: 3%; margin:1% 0;">
+									</form>
+<?php
+								}elseif($iscritto->num_rows && $pt && !$pt->num_rows){
+?>
+									<form method="POST" action="php/action/canc_iscrizione_corso-process.php">
+										<input type="hidden" name="idPalestra" value="<?php echo $row['ID_Palestra']; ?>">
+										<input type="hidden" name="idCorso" value="<?php echo $row['ID_Corso']; ?>">
+										<input type="submit" class="botclick" name="rimuovi" value="Cancella Iscrizione" style="padding: 3%; margin:1% 0;">
 									</form>
 <?php
 								}

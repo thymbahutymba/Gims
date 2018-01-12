@@ -33,7 +33,7 @@
 			<li>Nome del corso <input type="text" name="nome" required></li>
 			<li>
 				<label>Personal Trainer</label>
-				<select class="tendina" name="pt" required>
+				<select class="tendina" name="pt">
 					<?php
 						while($row = $res->fetch_assoc()){
 							echo "<option value=\"".$row['ID_Persona']."\">".$row['Cognome']." ".$row['Nome']."</option>";
@@ -49,13 +49,15 @@
 				<label>Quota Iscrizione </label>
 				<input type="number" name="money" step="0.01" required> €
 			</li>
-			<table class="orari">
+			<li><input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>"></li>
+
+			<li><table class="orari">
 				<tr>
 					<td>Giorno</td><td>Ora Inizio</td><td>Ora Fine</td>
 				</tr>
 				<tr class="tupla">
 					<td>
-						<select class="giorno" name="giorno[]" required>
+						<select class="giorno" name="giorno[]">
 							<option value="lunedi">Lunedì</option>
 							<option value="martedi">Martedì</option>
 							<option value="mercoledi">Mercoledì</option>
@@ -67,16 +69,15 @@
 					<td><input type="time" name="oraInizio[]" required></td>
 					<td><input type="time" name="oraFine[]" required></td>
 				</tr>
-			</table>
-			<li><input type="hidden" name="idPalestra" value="<?php echo $_GET['id']; ?>"></li>
-			<div class="left">
-				<input type="button" class="botclick" onclick="aggiungi_orario()" value="Aggiungi Orario"/>
-				<input type="button" class="botclick" onclick="rimuovi_orario()" value="Rimuovi Orario"/>
-			</div>
-			<div class="right">
-				<input type="reset" class="botclick" name="Reset" value="Reset">
-				<input type="submit" class="botclick" name="Inserisci" value="Inserisci">
-			</div>
+			</table></li>
+			<li><div>
+				<input type="button" class="botclick" onclick="aggiungi_orario()" value="Aggiungi Orario" />
+				<input type="button" class="botclick" onclick="rimuovi_orario()" value="Rimuovi Orario" />
+			</div></li>
+			<li><div>
+					<input type="reset" class="right botclick" name="Reset" value="Reset">
+					<input type="submit" class="right botclick" name="Inserisci" value="Inserisci">
+			</div></li>
 		</ul>
 	</form>
 </div>

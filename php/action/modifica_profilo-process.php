@@ -75,10 +75,10 @@
 	}else{
 		if(check_string($p_curPsw) && check_string($p_newPsw) && check_string($p_2newPsw)){
 			//controllo se la password inserita è corretta
-			if(!your_psw($p_curPsw)){
+			if(!your_psw($connection, $p_curPsw)){
 				send_message($page, "Password errata!");
 			}
-			if($p_newPsw !== $p_c_newPsw){
+			if($p_newPsw !== $p_2newPsw){
 				send_message($page, "Le password non corrispondono.");
 			}elseif(strlen($p_newPsw)<8 || strlen($p_2newPsw)>20){
 				send_message($page, "La password deve avere da 8 a 20 caratteri.");
